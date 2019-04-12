@@ -76,8 +76,19 @@ public class MyWebSocketHandler implements WebSocketHandler {
 
     @Override
     @SneakyThrows
-    public void handleTransportError(WebSocketSession var1, Throwable var2){
-
+    public void handleTransportError(WebSocketSession session, Throwable exception){
+        if(session.isOpen()){
+            session.close();
+        }
+        for(Set<WebSocketSession> item: userSocketSessionMap.values()){
+            if(item.contains(session)){
+                item.remove(session);
+            }
+            if(0==item.size()){
+                userSocketSessionMap.values().remove(item);
+            }
+            break;
+        }
     }
 
     @Override
