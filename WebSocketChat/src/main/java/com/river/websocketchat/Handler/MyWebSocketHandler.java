@@ -10,35 +10,21 @@ import org.springframework.web.socket.*;
 
 import java.io.IOException;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Slf4j
 @Component
 public class MyWebSocketHandler implements WebSocketHandler {
-    private static Map<Long, Set<WebSocketSession>> userSocketSessionMap= new ConcurrentHashMap<>();
+    private static Map<Long, WebSocketSession> userSocketSessionMap= new ConcurrentHashMap<>();
 
     @Override
     @SneakyThrows
     public void afterConnectionEstablished(WebSocketSession session){
         long uid = (long)session.getAttributes().get("uid");
 
-        boolean isNewUser = true;
-        for(Object o: userSocketSessionMap.keySet()){
-            if(((Map.Entry) o).getKey().equals(uid)){
-                userSocketSessionMap.get(uid).add(session);
-                isNewUser=false;
-                break;
-            }
-        }
-        if(isNewUser){
-            Set<WebSocketSession> sessions = new HashSet<>();
-            sessions.add(session);
-            userSocketSessionMap.put(uid, sessions);
-        }
-        log.info("当前在线用户人数：{}", userSocketSessionMap.values().size());
+        userSocketSessionMap.put(uid, session);
+        log.info("当前在线用户人数：{}", userSocketSessionMap.size());
     }
 
     @Override
@@ -62,15 +48,22 @@ public class MyWebSocketHandler implements WebSocketHandler {
     private void sendUserMessage(Long uid, TextMessage message){
         for(Long id: userSocketSessionMap.keySet()){
             if(id.equals(uid)){
-                for(WebSocketSession session: userSocketSessionMap.get("uid")){
-                    try {
-                        session.sendMessage(message);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                WebSocketSession session = userSocketSessionMap.get(id);
+                try {
+                    session.sendMessage(message);
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
                 break;
             }
+        }
+    }
+
+    public void broadcast(Message message){
+        for(WebSocketSession session: userSocketSessionMap.values()){
+            Long uid = (Long)session.getAttributes().get("uid");
+            TextMessage textMessage = new TextMessage(new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create().toJson(message));
+            sendUserMessage(uid, textMessage);
         }
     }
 
@@ -80,21 +73,15 @@ public class MyWebSocketHandler implements WebSocketHandler {
         if(session.isOpen()){
             session.close();
         }
-        for(Set<WebSocketSession> item: userSocketSessionMap.values()){
-            if(item.contains(session)){
-                item.remove(session);
-            }
-            if(0==item.size()){
-                userSocketSessionMap.values().remove(item);
-            }
-            break;
-        }
+        Long uid = (Long)session.getAttributes().get("uid");
+        userSocketSessionMap.remove(uid);
     }
 
     @Override
     @SneakyThrows
-    public void afterConnectionClosed(WebSocketSession var1, CloseStatus var2){
-
+    public void afterConnectionClosed(WebSocketSession session, CloseStatus status){
+        Long uid = (Long)session.getAttributes().get("uid");
+        userSocketSessionMap.remove(uid);
     }
 
     @Override
