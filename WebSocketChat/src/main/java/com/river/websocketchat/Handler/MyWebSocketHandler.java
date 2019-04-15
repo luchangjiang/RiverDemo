@@ -8,7 +8,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.*;
 
+import javax.jnlp.UnavailableServiceException;
 import java.io.IOException;
+import java.rmi.activation.UnknownObjectException;
 import java.util.Date;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -19,9 +21,12 @@ public class MyWebSocketHandler implements WebSocketHandler {
     private static Map<Long, WebSocketSession> userSocketSessionMap= new ConcurrentHashMap<>();
 
     @Override
-    @SneakyThrows
-    public void afterConnectionEstablished(WebSocketSession session){
-        long uid = (long)session.getAttributes().get("uid");
+    public void afterConnectionEstablished(WebSocketSession session) throws Exception{
+        Object uidObj = session.getAttributes().get("uid");
+        if(uidObj == null){
+            throw new UnavailableServiceException();
+        }
+        Long uid = Long.valueOf(uidObj.toString());
 
         userSocketSessionMap.put(uid, session);
         log.info("当前在线用户人数：{}", userSocketSessionMap.size());
@@ -30,7 +35,12 @@ public class MyWebSocketHandler implements WebSocketHandler {
     @Override
     @SneakyThrows
     public void handleMessage(WebSocketSession session, WebSocketMessage<?> message){
-        Long uid = (Long)session.getAttributes().get("uid");
+        Object uidObj = session.getAttributes().get("uid");
+        if(uidObj == null){
+            throw new UnavailableServiceException();
+        }
+        Long uid = Long.valueOf(uidObj.toString());
+
         Message msg = new Gson().fromJson(message.getPayload().toString(), Message.class);
         msg.setDate(new Date());
         TextMessage textMessage = new TextMessage(new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create().toJson(msg));
@@ -80,7 +90,12 @@ public class MyWebSocketHandler implements WebSocketHandler {
     @Override
     @SneakyThrows
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status){
-        Long uid = (Long)session.getAttributes().get("uid");
+        Object uidObj = session.getAttributes().get("uid");
+        if(uidObj == null){
+            throw new UnavailableServiceException();
+        }
+        Long uid = Long.valueOf(uidObj.toString());
+
         userSocketSessionMap.remove(uid);
     }
 
