@@ -57,7 +57,7 @@ public class MyWebSocketHandler implements WebSocketHandler {
     @SneakyThrows
     private void sendUserMessage(Long uid, TextMessage message){
         for(Long id: userSocketSessionMap.keySet()){
-            if(id.equals(uid)){
+            if(!id.equals(uid)){
                 WebSocketSession session = userSocketSessionMap.get(id);
                 try {
                     session.sendMessage(message);
