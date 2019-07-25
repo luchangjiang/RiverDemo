@@ -1,17 +1,17 @@
 package com.river.SpringSecurityDemo.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.river.SpringSecurityDemo.service.MyUserDetailsService;
 import com.river.SpringSecurityDemo.handler.RiverAuthenticationFailHandler;
 import com.river.SpringSecurityDemo.handler.RiverAuthenticationSuccessHandler;
+import com.river.SpringSecurityDemo.service.MyUserDetailsService;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -25,9 +25,10 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
  * @modified By：
  * @version: $
  */
+
+@Primary
+@Order(90)
 @Configuration
-@EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
 class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -42,8 +43,7 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginProcessingUrl("/token/form")
                 .and()
                 .authorizeRequests()
-                .antMatchers(
-                        "/token/**",
+                .antMatchers("/token/**",
                         "/oauth/**",
                         "/param/**",
                         "/actuator/**",
