@@ -4,6 +4,7 @@ import com.river.LindSecurity.authentication.LindAuthenticationProvider;
 import com.river.LindSecurity.authentication.LindUserNameAuthenticationFilter;
 import com.river.LindSecurity.handler.LindAuthenticationFailHandler;
 import com.river.LindSecurity.handler.LindAuthenticationSuccessHandler;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -102,5 +103,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public ObjectMapper objectMapper(){
+        return new ObjectMapper();
     }
 }

@@ -16,13 +16,20 @@
  */
 package com.river.LindSecurity.handler;
 
+import cn.hutool.core.util.CharsetUtil;
 import lombok.Builder;
 import lombok.extern.slf4j.Slf4j;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 /**
  * @author River
@@ -33,6 +40,9 @@ import javax.servlet.http.HttpServletResponse;
 public class LindAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 	private static final String BASIC_ = "Basic ";
 
+	@Autowired
+	ObjectMapper objectMapper;
+
 	/**
 	 * Called when a user has been successfully authenticated.
 	 * 调用spring security oauth API 生成 oAuth2AccessToken
@@ -42,9 +52,12 @@ public class LindAuthenticationSuccessHandler implements AuthenticationSuccessHa
 	 * @param authentication the <tt>Authentication</tt> object which was created during
 	 */
 	@Override
-	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
+	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
 		log.info("用户：{} 登录成功", request.getParameter("username"));
-
+		response.setCharacterEncoding(CharsetUtil.UTF_8);
+		response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
+		PrintWriter printWriter = response.getWriter();
+		printWriter.append(String.format("token is: %s", "dfwqwesdfweqew"));
 	}
 
 
