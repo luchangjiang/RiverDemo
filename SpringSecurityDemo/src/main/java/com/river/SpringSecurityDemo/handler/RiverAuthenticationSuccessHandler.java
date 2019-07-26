@@ -16,6 +16,7 @@
  */
 package com.river.SpringSecurityDemo.handler;
 
+import cn.hutool.core.codec.Base64;
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.CharsetUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -51,9 +52,7 @@ import java.io.PrintWriter;
  * 手机号登录成功，返回oauth token
  */
 @Slf4j
-@NoArgsConstructor
-@Getter
-@Setter
+@Builder
 public class RiverAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 	private static final String BASIC_ = "Basic ";
 
@@ -63,7 +62,8 @@ public class RiverAuthenticationSuccessHandler implements AuthenticationSuccessH
 
 	private ClientDetailsService clientDetailsService;
 
-	private AuthorizationServerTokenServices defaultAuthorizationServerTokenServices;
+	/*@Autowired
+	private AuthorizationServerTokenServices defaultAuthorizationServerTokenServices;*/
 
 	/**
 	 * Called when a user has been successfully authenticated.
@@ -88,6 +88,7 @@ public class RiverAuthenticationSuccessHandler implements AuthenticationSuccessH
 
 			ClientDetails clientDetails = clientDetailsService.loadClientByClientId(clientId);
 
+			log.info("Basic {}", Base64.encode("admin:admin"));
 			//校验secret
 			if (!passwordEncoder.matches(tokens[1], clientDetails.getClientSecret())) {
 				throw new InvalidClientException("Given client ID does not match authenticated client");
@@ -100,13 +101,13 @@ public class RiverAuthenticationSuccessHandler implements AuthenticationSuccessH
 			new DefaultOAuth2RequestValidator().validateScope(tokenRequest, clientDetails);
 			OAuth2Request oAuth2Request = tokenRequest.createOAuth2Request(clientDetails);
 			OAuth2Authentication oAuth2Authentication = new OAuth2Authentication(oAuth2Request, authentication);
-			OAuth2AccessToken oAuth2AccessToken = defaultAuthorizationServerTokenServices.createAccessToken(oAuth2Authentication);
-			log.info("获取token 成功：{}", oAuth2AccessToken.getValue());
+			/*OAuth2AccessToken oAuth2AccessToken = defaultAuthorizationServerTokenServices.createAccessToken(oAuth2Authentication);
+			log.info("获取token 成功：{}", oAuth2AccessToken.getValue());*/
 
 			response.setCharacterEncoding(CharsetUtil.UTF_8);
 			response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
 			PrintWriter printWriter = response.getWriter();
-			printWriter.append(objectMapper.writeValueAsString(oAuth2AccessToken));
+			printWriter.append(objectMapper.writeValueAsString("oAuth2AccessToken"));
 		} catch (IOException e) {
 			throw new BadCredentialsException(
 				"Failed to decode basic authentication token");

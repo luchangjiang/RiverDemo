@@ -19,6 +19,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.provider.token.AuthorizationServerTokenServices;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 import javax.sql.DataSource;
 
@@ -39,6 +40,10 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private DataSource dataSource;
 
+    /*@Lazy
+    @Autowired
+    private AuthorizationServerTokenServices defaultAuthorizationServerTokenServices;*/
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -57,15 +62,41 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .apply(riverSecurityConfigurer());
     }
 
+
     @Bean
     public RiverSecurityConfigurer riverSecurityConfigurer() {
         return RiverSecurityConfigurer.builder()
                 .riverUserDetailsService(myUserDetailService())
-                .riverAuthenticationSuccessHandler(lindAuthenticationSuccessHandler())
-                .riverAuthenticationFailHandler(lindAuthenticationFailHandler())
+                .riverAuthenticationSuccessHandler(riverAuthenticationSuccessHandler())
+                .riverAuthenticationFailHandler(riverAuthenticationFailHandler())
                 .objectMapper(objectMapper())
                 .passwordEncoder(passwordEncoder())
                 .build();
+    }
+
+    /**
+     * 验证成功处理.
+     *
+     * @return
+     */
+    @Bean
+    public AuthenticationSuccessHandler riverAuthenticationSuccessHandler() {
+        return RiverAuthenticationSuccessHandler.builder()
+                .objectMapper(objectMapper())
+                .clientDetailsService(myClientDetailService())
+                .passwordEncoder(passwordEncoder())
+//                .defaultAuthorizationServerTokenServices(defaultAuthorizationServerTokenServices)
+                .build();
+    }
+
+    /**
+     * 验证失败处理.
+     *
+     * @return
+     */
+    @Bean
+    public RiverAuthenticationFailHandler riverAuthenticationFailHandler() {
+        return new RiverAuthenticationFailHandler();
     }
 
 
@@ -86,25 +117,6 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-    /**
-     * 验证成功处理.
-     *
-     * @return
-     */
-    @Bean
-    public RiverAuthenticationSuccessHandler lindAuthenticationSuccessHandler() {
-        return new RiverAuthenticationSuccessHandler();
-    }
-
-    /**
-     * 验证失败处理.
-     *
-     * @return
-     */
-    @Bean
-    public RiverAuthenticationFailHandler lindAuthenticationFailHandler() {
-        return new RiverAuthenticationFailHandler();
-    }
 
     /**
      * 用户服务.
