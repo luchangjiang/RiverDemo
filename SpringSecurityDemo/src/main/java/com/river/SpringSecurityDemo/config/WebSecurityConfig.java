@@ -1,6 +1,8 @@
 package com.river.SpringSecurityDemo.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.river.SpringSecurityDemo.authentication.RiverAuthenticationProvider;
+import com.river.SpringSecurityDemo.authentication.RiverUserNameAuthenticationFilter;
 import com.river.SpringSecurityDemo.handler.RiverAuthenticationFailHandler;
 import com.river.SpringSecurityDemo.handler.RiverAuthenticationSuccessHandler;
 import com.river.SpringSecurityDemo.service.MyUserDetailsService;
@@ -8,15 +10,17 @@ import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
-import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.ProviderManager;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.AuthenticationFailureHandler;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import java.util.Collections;
 
 /**
  * @author ：River
@@ -26,31 +30,38 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
  * @version: $
  */
 
-@Primary
-@Order(90)
 @Configuration
+@EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private ObjectMapper objectMapper;
+    RiverAuthenticationSuccessHandler riverAuthenticationSuccessHandler;
 
+    @Autowired
+    RiverAuthenticationFailHandler riverAuthenticationFailHandler;
+
+    @Autowired
+    RiverAuthenticationProvider riverAuthenticationProvider;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+
         http
-                .formLogin()
-                .loginPage("/token/login")
-                .loginProcessingUrl("/token/form")
-                .and()
                 .authorizeRequests()
-                .antMatchers("/token/**",
-                        "/oauth/**",
-                        "/param/**",
-                        "/actuator/**",
-                        "/mobile/**").permitAll()
+                .antMatchers("/admin/**").hasRole("ADMIN")//按路由授权
                 .anyRequest().authenticated()
-                .and().csrf().disable()
-                .apply(riverSecurityConfigurer());
+                .and()
+                .formLogin()
+                .loginPage("/login")
+                .defaultSuccessUrl("/hello")//默认登录成功后跳转的页面
+                .successHandler(riverAuthenticationSuccessHandler)
+                .failureHandler(riverAuthenticationFailHandler)
+                .permitAll()
+                .and()
+                .addFilterAt(riverAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class).authorizeRequests().and()
+                .logout()
+                .permitAll();
     }
 
     @Bean
@@ -60,27 +71,43 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 
+    /**
+     * 自定义的Filter.
+     */
     @Bean
-    public AuthenticationSuccessHandler riverAuthenticationSuccessHandler() {
-        return RiverAuthenticationSuccessHandler.builder()
-                .objectMapper(objectMapper)
-                .passwordEncoder(passwordEncoder())
-                .build();
-    }
-
-    @Bean
-    public AuthenticationFailureHandler riverAuthenticationFailureHandler() {
-        return RiverAuthenticationFailHandler.builder().build();
+    RiverUserNameAuthenticationFilter riverAuthenticationFilter() {
+        RiverUserNameAuthenticationFilter phoneAuthenticationFilter = new RiverUserNameAuthenticationFilter();
+        ProviderManager providerManager =
+                new ProviderManager(Collections.singletonList(riverAuthenticationProvider));
+        phoneAuthenticationFilter.setAuthenticationManager(providerManager);
+        phoneAuthenticationFilter.setAuthenticationSuccessHandler(riverAuthenticationSuccessHandler);
+        phoneAuthenticationFilter.setAuthenticationFailureHandler(riverAuthenticationFailHandler);
+        return phoneAuthenticationFilter;
     }
 
     @Bean
     public RiverSecurityConfigurer riverSecurityConfigurer() {
-        return RiverSecurityConfigurer.builder()
-                .passwordEncoder(passwordEncoder())
-                .myUserDetailsService(myUserDetailService())
-                .riverAuthenticationSuccessHandler(riverAuthenticationSuccessHandler())
-                .riverAuthenticationFailHandler(riverAuthenticationFailureHandler())
-                .build();
+        return new RiverSecurityConfigurer();
+    }
+
+    /**
+     * 验证成功处理.
+     *
+     * @return
+     */
+    @Bean
+    public RiverAuthenticationSuccessHandler lindAuthenticationSuccessHandler() {
+        return new RiverAuthenticationSuccessHandler();
+    }
+
+    /**
+     * 验证失败处理.
+     *
+     * @return
+     */
+    @Bean
+    public RiverAuthenticationFailHandler lindAuthenticationFailHandler() {
+        return new RiverAuthenticationFailHandler();
     }
 
     /**
@@ -94,12 +121,17 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     /**
-     * 密码生成策略.
+     * 用户服务.
      *
      * @return
      */
     @Bean
     public MyUserDetailsService myUserDetailService() {
-        return new MyUserDetailsService(passwordEncoder());
+        return new MyUserDetailsService();
+    }
+
+    @Bean
+    public ObjectMapper objectMapper(){
+        return new ObjectMapper();
     }
 }

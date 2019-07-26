@@ -39,16 +39,20 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
  * @date 2018/8/5
  * 手机号登录配置入口
  */
-@Getter
-@Setter
-@Builder
 public class RiverSecurityConfigurer extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity> {
 	@Autowired
 	private ObjectMapper objectMapper;
 
+	@Autowired
 	private AuthenticationSuccessHandler riverAuthenticationSuccessHandler;
+
+	@Autowired
 	private AuthenticationFailureHandler riverAuthenticationFailHandler;
+
+	@Autowired
 	private MyUserDetailsService myUserDetailsService;
+
+	@Autowired
 	private PasswordEncoder passwordEncoder;
 
 	@Override

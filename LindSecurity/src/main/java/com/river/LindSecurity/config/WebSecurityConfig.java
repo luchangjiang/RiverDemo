@@ -73,6 +73,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return phoneAuthenticationFilter;
     }
 
+    /*@Bean
+    public UsernamePasswordAuthenticationFilter usernamePasswordAuthenticationFilter(){
+        UsernamePasswordAuthenticationFilter usernameAuthenticationFilter = new UsernamePasswordAuthenticationFilter();
+        ProviderManager providerManager =
+                new ProviderManager(Collections.singletonList(lindAuthenticationProvider));
+        usernameAuthenticationFilter.setAuthenticationManager(providerManager);
+        usernameAuthenticationFilter.setAuthenticationSuccessHandler(lindAuthenticationSuccessHandler);
+        usernameAuthenticationFilter.setAuthenticationFailureHandler(lindAuthenticationFailHandler);
+        return usernameAuthenticationFilter;
+    }*/
+
     /**
      * 密码生成策略.
      *
@@ -104,7 +115,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
     @Bean
     public ObjectMapper objectMapper(){
         return new ObjectMapper();

@@ -1,8 +1,10 @@
 package com.river.SpringSecurityDemo.authentication;
 
+import com.river.SpringSecurityDemo.service.MyUserDetailsService;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -27,8 +29,10 @@ import org.springframework.stereotype.Component;
 @Setter
 public class RiverAuthenticationProvider extends AbstractUserDetailsAuthenticationProvider {
 
-    private UserDetailsService userDetailsService;
+    @Autowired
+    private MyUserDetailsService userDetailsService;
 
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     /**
@@ -51,6 +55,7 @@ public class RiverAuthenticationProvider extends AbstractUserDetailsAuthenticati
         }
 
         String presentedPassword = authentication.getCredentials().toString();
+        log.info("password is: {}", userDetails.getPassword());
 
         if (!passwordEncoder.matches(presentedPassword, userDetails.getPassword())) {
             logger.debug("Authentication failed: password does not match stored value");

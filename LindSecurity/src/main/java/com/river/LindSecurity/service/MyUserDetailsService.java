@@ -20,7 +20,7 @@ import java.util.List;
  * @version: $
  */
 @Component
-public class MyUserDetailService implements UserDetailsService {
+public class MyUserDetailsService implements UserDetailsService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 

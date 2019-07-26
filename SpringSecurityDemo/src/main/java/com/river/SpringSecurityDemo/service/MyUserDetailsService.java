@@ -21,14 +21,9 @@ import java.util.List;
  * @modified By：
  * @version: $
  */
-@Component
-@NoArgsConstructor
 public class MyUserDetailsService implements UserDetailsService {
+    @Autowired
     private PasswordEncoder passwordEncoder;
-
-    public MyUserDetailsService(PasswordEncoder passwordEncoder){
-        this.passwordEncoder = passwordEncoder;
-    }
 
     @Override
     public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {

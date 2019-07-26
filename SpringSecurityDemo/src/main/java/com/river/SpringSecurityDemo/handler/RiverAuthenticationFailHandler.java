@@ -17,7 +17,7 @@
 
 package com.river.SpringSecurityDemo.handler;
 
-import lombok.Builder;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
@@ -32,7 +32,7 @@ import java.io.IOException;
  * @date 2018/10/8
  */
 @Slf4j
-@Builder
+@NoArgsConstructor
 public class RiverAuthenticationFailHandler implements AuthenticationFailureHandler {
 
 	/**

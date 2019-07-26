@@ -81,7 +81,13 @@
             <artifactId>swagger-annotations</artifactId>
             <version>1.5.22</version>
         </dependency>
-	</dependencies>
+        <dependency>
+            <groupId>com.river</groupId>
+            <artifactId>LindSecurity</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
 
 	<build>
 		<plugins>

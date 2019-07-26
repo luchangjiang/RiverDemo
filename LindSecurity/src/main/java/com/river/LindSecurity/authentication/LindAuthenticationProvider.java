@@ -1,5 +1,6 @@
 package com.river.LindSecurity.authentication;
 
+import com.river.LindSecurity.service.MyUserDetailsService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -25,7 +26,7 @@ import org.springframework.stereotype.Component;
 public class LindAuthenticationProvider extends AbstractUserDetailsAuthenticationProvider {
 
     @Autowired
-    UserDetailsService userDetailsService;
+    MyUserDetailsService userDetailsService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;

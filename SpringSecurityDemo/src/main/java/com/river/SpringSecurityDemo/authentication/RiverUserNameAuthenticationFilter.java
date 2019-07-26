@@ -23,15 +23,13 @@ import java.io.IOException;
 public class RiverUserNameAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 
     public RiverUserNameAuthenticationFilter() {
-        super(new AntPathRequestMatcher(SecurityConstants.MOBILE_TOKEN_URL, "POST"));
+        super(new AntPathRequestMatcher("/mobile/token", "GET"));
     }
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException, IOException, ServletException {
-        /*String username = request.getParameter("username");
-        String password = request.getParameter("password");*/
-        String username = "admin";
-        String password = "123";
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
         if (username == null) {
             throw new InternalAuthenticationServiceException("Failed to get the username");
         }
