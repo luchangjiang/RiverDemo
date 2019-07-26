@@ -43,7 +43,7 @@ public interface SecurityConstants {
 	/**
 	 * 前缀
 	 */
-	String MIDDLEWARE_PREFIX = "middleware_";
+	String RIVER_PREFIX = "river_";
 
 	/**
 	 * oauth 相关前缀
@@ -52,7 +52,7 @@ public interface SecurityConstants {
 	/**
 	 * 项目的license
 	 */
-	String MIDDLEWARE_LICENSE = "made by middleware";
+	String RIVER_LICENSE = "made by river";
 
 	/**
 	 * 内部

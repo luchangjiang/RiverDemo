@@ -20,9 +20,10 @@ package com.river.SpringSecurityDemo.config;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.river.SpringSecurityDemo.authentication.RiverAuthenticationProvider;
 import com.river.SpringSecurityDemo.authentication.RiverUserNameAuthenticationFilter;
-import com.river.SpringSecurityDemo.service.MyUserDetailsService;
+import com.river.SpringSecurityDemo.service.RiverUserDetailsService;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -39,23 +40,18 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
  * @date 2018/8/5
  * 手机号登录配置入口
  */
+@Builder
 public class RiverSecurityConfigurer extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity> {
-	@Autowired
 	private ObjectMapper objectMapper;
 
-	@Autowired
 	private AuthenticationSuccessHandler riverAuthenticationSuccessHandler;
 
-	@Autowired
 	private AuthenticationFailureHandler riverAuthenticationFailHandler;
 
-	@Autowired
-	private MyUserDetailsService myUserDetailsService;
+	private RiverUserDetailsService riverUserDetailsService;
 
-	@Autowired
 	private PasswordEncoder passwordEncoder;
 
-	@Override
 	public void configure(HttpSecurity http) {
 		RiverUserNameAuthenticationFilter riverUserNameAuthenticationFilter = new RiverUserNameAuthenticationFilter();
 		riverUserNameAuthenticationFilter.setAuthenticationManager(http.getSharedObject(AuthenticationManager.class));
@@ -64,7 +60,7 @@ public class RiverSecurityConfigurer extends SecurityConfigurerAdapter<DefaultSe
 
 		RiverAuthenticationProvider riverAuthenticationProvider = new RiverAuthenticationProvider();
 		riverAuthenticationProvider.setPasswordEncoder(passwordEncoder);
-		riverAuthenticationProvider.setUserDetailsService(myUserDetailsService);
+		riverAuthenticationProvider.setRiverUserDetailsService(riverUserDetailsService);
 
 		http.authenticationProvider(riverAuthenticationProvider)
 			.addFilterAfter(riverUserNameAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);

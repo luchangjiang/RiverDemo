@@ -1,6 +1,6 @@
 package com.river.SpringSecurityDemo.authentication;
 
-import com.river.SpringSecurityDemo.service.MyUserDetailsService;
+import com.river.SpringSecurityDemo.service.RiverUserDetailsService;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -25,14 +25,12 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Slf4j
-@Getter
 @Setter
+@Getter
 public class RiverAuthenticationProvider extends AbstractUserDetailsAuthenticationProvider {
 
-    @Autowired
-    private MyUserDetailsService userDetailsService;
+    private UserDetailsService riverUserDetailsService;
 
-    @Autowired
     private PasswordEncoder passwordEncoder;
 
     /**
@@ -78,7 +76,7 @@ public class RiverAuthenticationProvider extends AbstractUserDetailsAuthenticati
     protected UserDetails retrieveUser(
             String username, UsernamePasswordAuthenticationToken authentication)
             throws AuthenticationException {
-        UserDetails loadedUser = userDetailsService.loadUserByUsername(username);
+        UserDetails loadedUser = riverUserDetailsService.loadUserByUsername(username);
         if (loadedUser == null) {
             throw new InternalAuthenticationServiceException(
                     "UserDetailsService returned null, which is an interface contract violation");

@@ -2,25 +2,25 @@ package com.river.SpringSecurityDemo.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.river.SpringSecurityDemo.authentication.RiverAuthenticationProvider;
-import com.river.SpringSecurityDemo.authentication.RiverUserNameAuthenticationFilter;
 import com.river.SpringSecurityDemo.handler.RiverAuthenticationFailHandler;
 import com.river.SpringSecurityDemo.handler.RiverAuthenticationSuccessHandler;
-import com.river.SpringSecurityDemo.service.MyUserDetailsService;
+import com.river.SpringSecurityDemo.service.RiverClientDetailsService;
+import com.river.SpringSecurityDemo.service.RiverUserDetailsService;
+import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.*;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.ProviderManager;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.oauth2.provider.token.AuthorizationServerTokenServices;
+import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 
-import java.util.Collections;
+import javax.sql.DataSource;
 
 /**
  * @author ：River
@@ -30,39 +30,44 @@ import java.util.Collections;
  * @version: $
  */
 
+@Primary
+@Order(90)
 @Configuration
-@EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+@AllArgsConstructor
 class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    RiverAuthenticationSuccessHandler riverAuthenticationSuccessHandler;
-
-    @Autowired
-    RiverAuthenticationFailHandler riverAuthenticationFailHandler;
-
-    @Autowired
-    RiverAuthenticationProvider riverAuthenticationProvider;
+    private DataSource dataSource;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-
         http
-                .authorizeRequests()
-                .antMatchers("/admin/**").hasRole("ADMIN")//按路由授权
-                .anyRequest().authenticated()
-                .and()
                 .formLogin()
-                .loginPage("/login")
-                .defaultSuccessUrl("/hello")//默认登录成功后跳转的页面
-                .successHandler(riverAuthenticationSuccessHandler)
-                .failureHandler(riverAuthenticationFailHandler)
-                .permitAll()
+                .loginPage("/token/login")
+                .loginProcessingUrl("/token/form")
                 .and()
-                .addFilterAt(riverAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class).authorizeRequests().and()
-                .logout()
-                .permitAll();
+                .authorizeRequests()
+                .antMatchers("/token/**",
+                        "/oauth/**",
+                        "/param/**",
+                        "/actuator/**",
+                        "/mobile/**").permitAll()
+                .anyRequest().authenticated()
+                .and().csrf().disable()
+                .apply(riverSecurityConfigurer());
     }
+
+    @Bean
+    public RiverSecurityConfigurer riverSecurityConfigurer() {
+        return RiverSecurityConfigurer.builder()
+                .riverUserDetailsService(myUserDetailService())
+                .riverAuthenticationSuccessHandler(lindAuthenticationSuccessHandler())
+                .riverAuthenticationFailHandler(lindAuthenticationFailHandler())
+                .objectMapper(objectMapper())
+                .passwordEncoder(passwordEncoder())
+                .build();
+    }
+
 
     @Bean
     @Override
@@ -72,22 +77,13 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     /**
-     * 自定义的Filter.
+     * 密码生成策略.
+     *
+     * @return
      */
     @Bean
-    RiverUserNameAuthenticationFilter riverAuthenticationFilter() {
-        RiverUserNameAuthenticationFilter phoneAuthenticationFilter = new RiverUserNameAuthenticationFilter();
-        ProviderManager providerManager =
-                new ProviderManager(Collections.singletonList(riverAuthenticationProvider));
-        phoneAuthenticationFilter.setAuthenticationManager(providerManager);
-        phoneAuthenticationFilter.setAuthenticationSuccessHandler(riverAuthenticationSuccessHandler);
-        phoneAuthenticationFilter.setAuthenticationFailureHandler(riverAuthenticationFailHandler);
-        return phoneAuthenticationFilter;
-    }
-
-    @Bean
-    public RiverSecurityConfigurer riverSecurityConfigurer() {
-        return new RiverSecurityConfigurer();
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 
     /**
@@ -111,23 +107,23 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     /**
-     * 密码生成策略.
-     *
-     * @return
-     */
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
-    /**
      * 用户服务.
      *
      * @return
      */
     @Bean
-    public MyUserDetailsService myUserDetailService() {
-        return new MyUserDetailsService();
+    public RiverUserDetailsService myUserDetailService() {
+        return new RiverUserDetailsService();
+    }
+
+    /**
+     * 客户端服务.
+     *
+     * @return
+     */
+    @Bean
+    public RiverClientDetailsService myClientDetailService() {
+        return new RiverClientDetailsService(dataSource);
     }
 
     @Bean
