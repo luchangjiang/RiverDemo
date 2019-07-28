@@ -62,7 +62,6 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .apply(riverSecurityConfigurer());
     }
 
-
     @Bean
     public RiverSecurityConfigurer riverSecurityConfigurer() {
         return RiverSecurityConfigurer.builder()

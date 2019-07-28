@@ -52,7 +52,7 @@ import java.util.Map;
  * @date 2018/6/22
  * 认证服务器配置
  */
-//@Configuration
+@Configuration
 @AllArgsConstructor
 @EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
