@@ -10,7 +10,7 @@ import org.springframework.data.redis.core.StringRedisTemplate;
  * Created by @author yihui in 15:03 18/11/8.
  */
 @Configuration
-public class AutoConfig {
+public class RedisConfig {
 
     @Bean(value = "selfRedisTemplate")
     public RedisTemplate<String, String> stringRedisTemplate(RedisConnectionFactory redisConnectionFactory) {

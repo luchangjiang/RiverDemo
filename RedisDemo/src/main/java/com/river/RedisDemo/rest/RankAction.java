@@ -4,6 +4,7 @@ import com.river.RedisDemo.component.RankListComponent;
 import com.river.RedisDemo.modal.RankDO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.List;
  * Created by @author yihui in 20:16 18/12/25.
  */
 @RestController
+@RequestMapping("/rank")
 public class RankAction {
     @Autowired
     private RankListComponent rankListComponent;

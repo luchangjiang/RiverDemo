@@ -1,7 +1,10 @@
 package com.river.RedisDemo;
 
+import com.river.RedisDemo.rest.HashAction;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Random;
@@ -16,6 +19,9 @@ public class RankInitTest {
 
     private Random random;
     private RestTemplate restTemplate;
+
+    @Autowired
+    private HashAction testHash;
 
     @Before
     public void init() {
@@ -34,8 +40,14 @@ public class RankInitTest {
     @Test
     public void testInitRank() {
         for (int i = 0; i < 30; i++) {
-            restTemplate.getForObject("http://localhost:7038/update?userId=" + genUserId() + "&score=" + genScore(),
+            restTemplate.getForObject("http://localhost:7038/rank/update?userId=" + genUserId() + "&score=" + genScore(),
                     String.class);
         }
+    }
+
+    @Test
+    public void testHash(){
+        String result = restTemplate.getForObject("http://localhost:7038/hash/do", String.class);
+        Assert.assertTrue("success".equals(result));
     }
 }
