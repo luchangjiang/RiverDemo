@@ -11,8 +11,8 @@ import org.springframework.core.annotation.Order;
  * @author: River
  * @create: 2019-07-30 11:12
  **/
-@Configuration
-@Order(-1)
+/*@Configuration
+@Order(-1)*/
 public class JsonConfig {
 
     @Bean

@@ -1,6 +1,7 @@
 package com.river.jsonDemo;
 
 import com.river.jsonDemo.bean.Query;
+import com.river.jsonDemo.config.SpringContextHolder;
 import com.river.jsonDemo.service.JsonService;
 import org.junit.Assert;
 import org.junit.Test;
@@ -15,11 +16,13 @@ import java.util.List;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class JsonDemoApplicationTests {
-	@Autowired
-	private JsonService jsonService;
+	/*@Autowired
+	private JsonService jsonService;*/
 
 	@Test
 	public void contextLoads() throws IOException {
+		JsonService jsonService = SpringContextHolder.getBean("jsonService");
+		System.out.println(jsonService.test().get(0).getKey());
 		List<Query> queryList = jsonService.test();
 		Assert.assertNotNull(queryList);
 	}

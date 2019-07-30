@@ -6,6 +6,7 @@ import com.river.jsonDemo.bean.Query;
 import com.river.jsonDemo.util.MapUtil;
 import org.apache.commons.collections4.map.LinkedMap;
 import org.apache.commons.io.IOUtils;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -18,6 +19,7 @@ import java.util.List;
  * @author: River
  * @create: 2019-07-30 11:10
  **/
+@Service("jsonService")
 public class JsonService {
     /**
      * 读取类路径下的配置文件
