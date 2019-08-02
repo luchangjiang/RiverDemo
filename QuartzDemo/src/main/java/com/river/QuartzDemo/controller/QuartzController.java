@@ -19,7 +19,7 @@ public class QuartzController{
     public String scheduleJob2()
     {
         try {
-            myScheduler.startJob("0/5 * * * * ?","job2","group2", ScheduledJob.class);//每五秒执行一次
+            myScheduler.startJob("0/15 * * * * ?","job2","group2", ScheduledJob.class);//每五秒执行一次
             //0 0/5 14 * * ?在每天下午2点到下午2:55期间的每5分钟触发
             //0 50 14 * * ?在每天下午2点50分5秒执行一次
 //            myScheduler.startJob("5 50 14 * * ?","job2","group2", ScheduledJob.class);

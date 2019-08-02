@@ -19,7 +19,6 @@ public class SchedulerListener implements JobListener {
         String jobName = context.getJobDetail().getKey().toString();
         System.out.println("jobToBeExecuted");
         System.out.println("Job : " + jobName + " is going to start...");
-
     }
 
     //任务调度被拒了
