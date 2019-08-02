@@ -1,4 +1,4 @@
-package com.river.LockDemo;
+package com.river.LockDemo.interrupt;
 
 import java.util.concurrent.TimeUnit;
 

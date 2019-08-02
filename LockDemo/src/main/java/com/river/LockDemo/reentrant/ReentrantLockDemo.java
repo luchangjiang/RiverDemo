@@ -1,4 +1,4 @@
-package com.river.LockDemo;
+package com.river.LockDemo.reentrant;
 
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
