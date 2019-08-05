@@ -6,7 +6,7 @@ import java.util.concurrent.FutureTask;
 /**
  * @author ：River
  * @date ：Created in 7/10/2019 9:44 AM
- * @description：
+ * @description：通过FutureTask实现连接池
  * @modified By：
  * @version: $
  */
