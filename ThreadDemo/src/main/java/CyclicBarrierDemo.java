@@ -10,7 +10,7 @@ import java.util.concurrent.CyclicBarrier;
  * @modified By：
  * @version: $
  */
-public class Demo5 extends BaseDemo {
+public class CyclicBarrierDemo extends BaseDemo {
 
     private CyclicBarrier cyclicBarrier = new CyclicBarrier(2);
 
@@ -34,7 +34,7 @@ public class Demo5 extends BaseDemo {
 
     public static void main(String[] args) {
 
-        Demo5 demo5 = new Demo5();
+        CyclicBarrierDemo demo5 = new CyclicBarrierDemo();
 
         demo5.call();
 

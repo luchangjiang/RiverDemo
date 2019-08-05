@@ -11,7 +11,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * @modified By：
  * @version: $
  */
-public class Demo2 extends BaseDemo {
+public class ReentrantLockDemo extends BaseDemo {
 
     private final Lock lock = new ReentrantLock();
     private final Condition con = lock.newCondition();
@@ -33,7 +33,7 @@ public class Demo2 extends BaseDemo {
 
     public static void main(String[] args) {
 
-        Demo2 demo2 = new Demo2();
+        ReentrantLockDemo demo2 = new ReentrantLockDemo();
 
         demo2.call();
 

@@ -9,7 +9,7 @@ import java.util.concurrent.CountDownLatch;
  * @modified By：
  * @version: $
  */
-public class Demo4 extends BaseDemo {
+public class CountDownLatchDemo extends BaseDemo {
 
     private final CountDownLatch countDownLatch = new CountDownLatch(1);
 
@@ -26,7 +26,7 @@ public class Demo4 extends BaseDemo {
 
     public static void main(String[] args) {
 
-        Demo4 demo4 = new Demo4();
+        CountDownLatchDemo demo4 = new CountDownLatchDemo();
 
         demo4.call();
 

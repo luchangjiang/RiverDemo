@@ -10,7 +10,7 @@ import java.util.concurrent.FutureTask;
  * @modified By：
  * @version: $
  */
-public class ConnectionTest {
+public class FutureConnectionDemo {
     private ConcurrentHashMap<String, FutureTask<Connection>> connectionPool = new ConcurrentHashMap<String, FutureTask<Connection>>();
 
     public Connection getConnection(String key) throws Exception{

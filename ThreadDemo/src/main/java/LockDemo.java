@@ -7,7 +7,7 @@ import base.BaseDemo;
  * @modified By：
  * @version: $
  */
-public class Demo1 extends BaseDemo {
+public class LockDemo extends BaseDemo {
 
     private final Object lock = new Object();
 
@@ -25,7 +25,7 @@ public class Demo1 extends BaseDemo {
 
     public static void main(String[] args) {
 
-        Demo1 demo1 = new Demo1();
+        LockDemo demo1 = new LockDemo();
 
         demo1.call();
 

@@ -14,7 +14,6 @@ public class Demo1 {
             System.out.println("threadName:" + Thread.currentThread().getName());
             try {
                 TimeUnit.SECONDS.sleep(3);
-
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
