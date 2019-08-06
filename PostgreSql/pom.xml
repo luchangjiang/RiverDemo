@@ -12,6 +12,7 @@
 	<artifactId>PostgreSql</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>PostgreSql</name>
+	<packaging>jar</packaging>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
@@ -20,8 +21,7 @@
 		<commons-collections4.version>4.1</commons-collections4.version>
 		<mybatis-spring-boot-starter.version>1.1.1</mybatis-spring-boot-starter.version>
 		<mysql-connector-java.version>5.1.40</mysql-connector-java.version>
-		<swagger.fox.version>2.9.2</swagger.fox.version>
-		<swagger-bootstrap-ui.version>1.9.4</swagger-bootstrap-ui.version>
+		<swagger.version>1.8.0.RELEASE</swagger.version>
 	</properties>
 
 	<dependencies>
@@ -73,16 +73,10 @@
 			<artifactId>commons-collections4</artifactId>
 			<version>${commons-collections4.version}</version>
 		</dependency>
-		<!--swagger 依赖-->
 		<dependency>
-			<groupId>io.springfox</groupId>
-			<artifactId>springfox-swagger2</artifactId>
-			<version>${swagger.fox.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.github.xiaoymin</groupId>
-			<artifactId>swagger-bootstrap-ui</artifactId>
-			<version>${swagger-bootstrap-ui.version}</version>
+			<groupId>com.spring4all</groupId>
+			<artifactId>swagger-spring-boot-starter</artifactId>
+			<version>${swagger.version}</version>
 		</dependency>
 	</dependencies>
 

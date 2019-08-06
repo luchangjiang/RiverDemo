@@ -20,4 +20,24 @@ spring:
     username: postgres
 
 swagger:
+  # 是否启用swagger，默认：true
   enabled: true
+  # 标题
+  title: 股票配置 RESTful API
+  contact:
+    # 维护人
+    name: River
+    email: 20207075@qq.com
+    url: https://www.river.io
+  # 版本
+  version: 1.0.1
+  # 描述
+  description:
+  # swagger扫描的基础包，默认：全扫描
+  base-package: com.river.postgre
+  # 需要处理的基础URL规则，默认：/**
+  base-path: /**
+  # 需要排除的URL规则，默认：空
+  #  exclude-path: ""
+  license: Apache License, Version 2.0
+  license-url: https://www.apache.org/licenses/LICENSE-2.0.html

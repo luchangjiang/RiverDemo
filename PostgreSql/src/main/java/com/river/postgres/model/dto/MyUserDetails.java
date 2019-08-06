@@ -1,6 +1,7 @@
 package com.river.postgres.model.dto;
 
 import com.river.postgres.model.entity.User;
+import io.swagger.annotations.ApiModel;
 import lombok.Getter;
 import lombok.ToString;
 import org.apache.commons.collections4.CollectionUtils;
@@ -18,6 +19,7 @@ import java.util.Set;
  */
 @Getter
 @ToString
+@ApiModel(value="认证用户")
 public class MyUserDetails extends User implements UserDetails {
 
     private static final long serialVersionUID = 1702923242319850756L;
