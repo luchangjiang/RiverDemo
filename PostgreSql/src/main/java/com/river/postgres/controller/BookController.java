@@ -8,6 +8,8 @@ import com.river.postgres.model.entity.Book;
 import com.river.postgres.model.entity.BookWithBookStore;
 import com.river.postgres.service.BookService;
 import com.river.postgres.util.PageUtil;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +20,7 @@ import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
-
+@Api(value="/book", tags="图书管理")
 @RestController
 @RequestMapping("/book")
 public class BookController {
@@ -30,6 +32,7 @@ public class BookController {
         this.bookService = bookService;
     }
 
+    @ApiOperation(value="获取图书清单", notes = "分页获取图书清单")
     @GetMapping
     public ResponseEntity<?> getBooks(@RequestParam(value = "page", required = false) String pageString,
                                       @RequestParam(value = "pageSize", required = false) String perPageString) {
@@ -44,6 +47,7 @@ public class BookController {
                         .setTotalPage(bookService.getTotalPage(pageSize)));
     }
 
+    @ApiOperation(value="按id获取图书详情", notes = "通过id获取图书的详细信息")
     @GetMapping("/{bookId}")
     public ResponseEntity<?> getBookById(@PathVariable Long bookId) {
         return bookService
@@ -54,16 +58,19 @@ public class BookController {
                         .setId(bookId));
     }
 
+    @ApiOperation(value="按作者获取图书清单", notes = "通过作者名称获取图书的详细信息")
     @GetMapping("/getBooksByAuthor")
     public ResponseEntity<List<Book>> getBooksByAuthor(String author){
         return ResponseEntity.ok(bookService.getBooksByAuthor(author));
     }
 
+    @ApiOperation(value="获取书名列表", notes = "获取所有书籍的书名清单")
     @GetMapping("/getAllBookNames")
     public ResponseEntity<List<String>> getAllBookNames(){
         return ResponseEntity.ok(bookService.getAllBookNames());
     }
 
+    @ApiOperation(value="按id获取图书信息", notes = "通过id获取图书的详细信息及相关书店的信息")
     @GetMapping("/getBookWithBookStoreById/{bookId}")
     public ResponseEntity<Optional<BookWithBookStore>> getBookWithBookStoreById(@PathVariable Long bookId){
         assertBookExist(bookId);
@@ -71,6 +78,7 @@ public class BookController {
         return ResponseEntity.ok(bookService.getBookWithBookStoreById(bookId));
     }
 
+    @ApiOperation(value="添加图书", notes = "添加图书信息")
     @PostMapping
     public ResponseEntity<?> postBook(@RequestBody Book book) {
         bookService.saveBook(book);
@@ -87,6 +95,7 @@ public class BookController {
 
     }
 
+    @ApiOperation(value="修改图书", notes = "修改图书信息")
     @PutMapping("/{bookId}")
     public ResponseEntity<?> putBook(@PathVariable Long bookId, @RequestBody Book book) {
         assertBookExist(bookId);
@@ -98,6 +107,7 @@ public class BookController {
                 .body(book);
     }
 
+    @ApiOperation(value="删除图书", notes = "删除图书信息")
     @DeleteMapping("/{bookId}")
     public ResponseEntity<?> deleteBook(@PathVariable Long bookId) {
         assertBookExist(bookId);

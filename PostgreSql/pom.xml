@@ -20,6 +20,8 @@
 		<commons-collections4.version>4.1</commons-collections4.version>
 		<mybatis-spring-boot-starter.version>1.1.1</mybatis-spring-boot-starter.version>
 		<mysql-connector-java.version>5.1.40</mysql-connector-java.version>
+		<swagger.fox.version>2.9.2</swagger.fox.version>
+		<swagger-bootstrap-ui.version>1.9.4</swagger-bootstrap-ui.version>
 	</properties>
 
 	<dependencies>
@@ -27,12 +29,10 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -72,6 +72,17 @@
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-collections4</artifactId>
 			<version>${commons-collections4.version}</version>
+		</dependency>
+		<!--swagger 依赖-->
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>${swagger.fox.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.github.xiaoymin</groupId>
+			<artifactId>swagger-bootstrap-ui</artifactId>
+			<version>${swagger-bootstrap-ui.version}</version>
 		</dependency>
 	</dependencies>
 

@@ -1,0 +1,23 @@
+logging:
+  file: /${project.name}/logs/postgres.log
+  level:
+    com:
+      river:
+        postgres:
+          mapper: DEBUG
+mybatis:
+  mapper-locations: classpath*:mapper/**/*Mapper.xml
+  type-aliases-package: com.river.postgres.model
+project:
+  name: postgres
+server:
+  port: 8079
+spring:
+  datasource:
+    password: 123456
+    platform: postgres
+    url: jdbc:postgresql://localhost:5432/postgres?currentSchema=murugar
+    username: postgres
+
+swagger:
+  enabled: true

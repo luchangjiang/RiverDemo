@@ -1,9 +1,8 @@
 package com.river.postgres.model.entity;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.*;
 import lombok.experimental.Accessors;
 
 import java.util.List;
@@ -11,16 +10,22 @@ import java.util.List;
 
 @Accessors(chain = true)
 @NoArgsConstructor
-@Getter
-@Setter
+@Data
 @ToString(callSuper = true)
+@ApiModel(value="书店及在售信息")
 public class BookStoreWithBooks extends BookStore {
 
     private static final long serialVersionUID = -740463675258248874L;
 
+    @ApiModelProperty(value="id", required = true)
     private long id;
-    private String name;
-    private String address;
-    private List<Book> books;
 
+    @ApiModelProperty(value="书店名称", required = true)
+    private String name;
+
+    @ApiModelProperty(value="书店地址")
+    private String address;
+
+    @ApiModelProperty(value="在售书籍")
+    private List<Book> books;
 }
