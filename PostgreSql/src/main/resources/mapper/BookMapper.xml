@@ -20,7 +20,7 @@
         <result property="topic" column="topic"/>
         <result property="publishDate" column="publish_date"/>
         <result property="bookStoreId" column="book_store_id"/>
-        <association property="bookStore" javaType="com.river.postgres.model.entity.BookStore" columnPrefix="book_store_"/>
+        <association property="bookStore" javaType="com.river.postgres.model.entity.BookStore" resultMap="com.river.postgres.mapper.BookStoreMapper.bookStore" columnPrefix="book_store_"/>
     </resultMap>
 
     <insert id="insertBook" useGeneratedKeys="true" keyProperty="id">
@@ -99,7 +99,7 @@
         LEFT JOIN
           book_store ON book.book_store_id = book_store.id
         WHERE
-          id = #{id}
+          book.id = #{id}
     </select>
 
     <select id="selectCount" resultType="integer">

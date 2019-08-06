@@ -5,6 +5,7 @@ import com.river.postgres.constant.ResourceNameConstant;
 import com.river.postgres.exception.ResourceNotFoundException;
 import com.river.postgres.model.dto.PaginatedResult;
 import com.river.postgres.model.entity.Book;
+import com.river.postgres.model.entity.BookWithBookStore;
 import com.river.postgres.service.BookService;
 import com.river.postgres.util.PageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
+import java.util.Optional;
 
 
 @RestController
@@ -49,6 +52,23 @@ public class BookController {
                 .orElseThrow(() -> new ResourceNotFoundException()
                         .setResourceName(ResourceNameConstant.BOOK)
                         .setId(bookId));
+    }
+
+    @GetMapping("/getBooksByAuthor")
+    public ResponseEntity<List<Book>> getBooksByAuthor(String author){
+        return ResponseEntity.ok(bookService.getBooksByAuthor(author));
+    }
+
+    @GetMapping("/getAllBookNames")
+    public ResponseEntity<List<String>> getAllBookNames(){
+        return ResponseEntity.ok(bookService.getAllBookNames());
+    }
+
+    @GetMapping("/getBookWithBookStoreById/{bookId}")
+    public ResponseEntity<Optional<BookWithBookStore>> getBookWithBookStoreById(@PathVariable Long bookId){
+        assertBookExist(bookId);
+
+        return ResponseEntity.ok(bookService.getBookWithBookStoreById(bookId));
     }
 
     @PostMapping

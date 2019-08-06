@@ -12,7 +12,7 @@
         <id property="id" column="id"/>
         <result property="name" column="name"/>
         <result property="address" column="address"/>
-        <collection property="books" ofType="com.river.postgres.model.entity.Book" columnPrefix="book_"/>
+        <collection property="books" ofType="com.river.postgres.model.entity.Book" resultMap="com.river.postgres.mapper.BookMapper.book" columnPrefix="book_" />
     </resultMap>
 
     <select id="selectBookStoreById" resultMap="bookStore">
@@ -45,7 +45,7 @@
         LEFT JOIN
           book ON book_store.id = book.book_store_id
         WHERE
-          id = #{id}
+          book_store.id = #{id}
     </select>
 
 </mapper>

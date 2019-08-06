@@ -7,6 +7,7 @@ public class ResourceNameConstant {
 
     public static final String BOOK = "book";
 
+    public static final String STORE = "store";
     /**
      * Prevent instantiation
      */

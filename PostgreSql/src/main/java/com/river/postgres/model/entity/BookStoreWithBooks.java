@@ -18,6 +18,9 @@ public class BookStoreWithBooks extends BookStore {
 
     private static final long serialVersionUID = -740463675258248874L;
 
+    private long id;
+    private String name;
+    private String address;
     private List<Book> books;
 
 }
