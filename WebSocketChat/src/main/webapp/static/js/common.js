@@ -39,7 +39,7 @@ function getHostPort(){
     //获取主机地址之后的目录，如： uimcardprj/share/meun.jsp
     var pathName=window.document.location.pathname;
     var pos=curWwwPath.indexOf(pathName);
-    //获取主机地址，如： http://localhost:8083
+    //获取主机地址，如： localhost:8083
     var localhostPath=curWwwPath.substring(0,pos).replace("http://","");
 
     return(localhostPath);

@@ -39,6 +39,9 @@
             stompClient.subscribe('/topic/getResponse', function (response) {
                 showResponse(JSON.parse(response.body).responseMessage);
             })
+            stompClient.subscribe('/topic/listenerMsg', function (response) {
+                showResponse(JSON.parse(response.body).responseMessage);
+            })
         });
     }
     function disconnect() {

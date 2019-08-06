@@ -1,4 +1,4 @@
-package com.river.WebSocket;
+package com.river.WebSocket.message;
 
 public class RequestMessage {
 

@@ -1,4 +1,4 @@
-package com.river.WebSocket;
+package com.river.WebSocket.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
