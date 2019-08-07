@@ -5,13 +5,10 @@ logging:
       river:
         postgres:
           mapper: DEBUG
-mybatis:
-  mapper-locations: classpath*:mapper/**/*Mapper.xml
-  type-aliases-package: com.river.postgres.model
 project:
   name: postgres
 server:
-  port: 8079
+  port: 8078
 spring:
   datasource:
     password: 123456
@@ -41,3 +38,10 @@ swagger:
   #  exclude-path: ""
   license: Apache License, Version 2.0
   license-url: https://www.apache.org/licenses/LICENSE-2.0.html
+
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/**/*Mapper.xml
+  global-config:
+    banner: false
+    db-config:
+      id-type: auto

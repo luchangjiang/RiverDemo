@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~
+  ~      Copyright (c) 2018-2025, Eddid All rights reserved.
+  ~
+  ~  Redistribution and use in source and binary forms, with or without
+  ~  modification, are permitted provided that the following conditions are met:
+  ~
+  ~ Redistributions of source code must retain the above copyright notice,
+  ~  this list of conditions and the following disclaimer.
+  ~  Redistributions in binary form must reproduce the above copyright
+  ~  notice, this list of conditions and the following disclaimer in the
+  ~  documentation and/or other materials provided with the distribution.
+  ~  Neither the name of the pig4cloud.com developer nor the names of its
+  ~  contributors may be used to endorse or promote products derived from
+  ~  this software without specific prior written permission.
+  ~  Author: River (River.lu@newtype.io)
+  ~
+  -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.river.postgres.murugar.mapper.BookMapper">
+  <resultMap id="bookMap" type="com.river.postgres.entity.Book">
+            <id property="id" column="id"/>
+                <result property="bookStoreId" column="book_store_id"/>
+                <result property="name" column="name"/>
+                <result property="author" column="author"/>
+                <result property="price" column="price"/>
+                <result property="topic" column="topic"/>
+                <result property="publishDate" column="publish_date"/>
+          </resultMap>
+</mapper>
