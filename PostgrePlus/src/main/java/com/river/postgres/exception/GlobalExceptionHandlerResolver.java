@@ -33,8 +33,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
- * @author lengleng
- * @date 2018/8/30
+ * @author river
+ * @date 2019/6/17
  * 全局异常处理器
  */
 @Slf4j
@@ -51,18 +51,6 @@ public class GlobalExceptionHandlerResolver {
 	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
 	public R handleGlobalException(Exception exception) {
 
-		log.error("{} ex={}", HttpStatus.INTERNAL_SERVER_ERROR, exception.getLocalizedMessage());
-		return R.failed(BaseResultEnum.INTERNAL_SERVER_ERROR.getResultJsonString());
-	}
-	/**
-	 * ServerInternalErrorException
-	 *
-	 * @param exception
-	 * @return R
-	 */
-	@ExceptionHandler(ServerInternalErrorException.class)
-	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-	public R serverInternalErrorExceptionHandler(HttpServletRequest request, ServerInternalErrorException exception) {
 		log.error("{} ex={}", HttpStatus.INTERNAL_SERVER_ERROR, exception.getLocalizedMessage());
 		return R.failed(BaseResultEnum.INTERNAL_SERVER_ERROR.getResultJsonString());
 	}
@@ -100,8 +88,8 @@ public class GlobalExceptionHandlerResolver {
 	@ExceptionHandler(ResourceNotFoundException.class)
 	@ResponseStatus(HttpStatus.NOT_FOUND)
 	public R resourceNotFoundExceptionHandler(ResourceNotFoundException exception) {
-		log.error("{} ex={}", BaseResultEnum.PARAM_MISSING.getResultModel().getCode(), exception.getLocalizedMessage());
-		return R.failed(BaseResultEnum.PARAM_MISSING.getResultJsonString());
+		log.error("{} ex={}", BaseResultEnum.RESOURCE_NOT_FOUND.getResultModel().getCode(), exception.getLocalizedMessage());
+		return R.failed(BaseResultEnum.RESOURCE_NOT_FOUND.getResultJsonString());
 	}
 	/**
 	 * ParameterIllegalException

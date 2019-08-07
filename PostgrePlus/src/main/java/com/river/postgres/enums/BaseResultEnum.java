@@ -58,7 +58,6 @@ public enum BaseResultEnum {
     PARAM_TOKEN_FAIL(9903, "common.request.param.token.fail"),   // TOKEN非法
     ;
 
-
     private int code;
     private int status;
     private String msg;
