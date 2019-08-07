@@ -86,7 +86,7 @@ public interface CommonConstants {
 	/**
 	 * 公共参数
 	 */
-	String PIG_PUBLIC_PARAM_KEY = "PIG_PUBLIC_PARAM_KEY";
+	String PIG_PUBLIC_PARAM_KEY = "RIVER_PUBLIC_PARAM_KEY";
 
 	/**
 	 * 成功标记
