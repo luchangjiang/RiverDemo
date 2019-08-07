@@ -56,7 +56,6 @@ public class BookController {
         return R.ok(bookService.page(page, Wrappers.query(book)));
     }
 
-
     /**
      * 通过id查询dfd
      * @param id id

@@ -71,12 +71,12 @@ public interface CommonConstants {
 	/**
 	 * 前端工程名
 	 */
-	String FRONT_END_PROJECT = "pigx-ui";
+	String FRONT_END_PROJECT = "river-ui";
 
 	/**
 	 * 后端工程名
 	 */
-	String BACK_END_PROJECT = "pigx";
+	String BACK_END_PROJECT = "river";
 
 	/**
 	 * 验证码前缀
@@ -100,5 +100,5 @@ public interface CommonConstants {
 	/**
 	 * 默认存储bucket
 	 */
-	String BUCKET_NAME = "lengleng";
+	String BUCKET_NAME = "river";
 }
