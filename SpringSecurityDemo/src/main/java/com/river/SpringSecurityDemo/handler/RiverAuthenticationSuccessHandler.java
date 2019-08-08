@@ -32,6 +32,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.common.exceptions.InvalidClientException;
@@ -40,6 +41,7 @@ import org.springframework.security.oauth2.provider.*;
 import org.springframework.security.oauth2.provider.request.DefaultOAuth2RequestValidator;
 import org.springframework.security.oauth2.provider.token.AuthorizationServerTokenServices;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -52,14 +54,13 @@ import java.io.PrintWriter;
  * 手机号登录成功，返回oauth token
  */
 @Slf4j
-@Builder
 public class RiverAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 	private static final String BASIC_ = "Basic ";
 
+	@Autowired
 	private ObjectMapper objectMapper;
 
-	private PasswordEncoder passwordEncoder;
-
+	@Autowired
 	private ClientDetailsService clientDetailsService;
 
 	@Autowired
@@ -90,9 +91,9 @@ public class RiverAuthenticationSuccessHandler implements AuthenticationSuccessH
 //			String password = passwordEncoder.encode("admin123");
 //			log.info(password);
 			//校验secret
-			if (!passwordEncoder.matches(tokens[1], clientDetails.getClientSecret())) {
+			PasswordEncoder delegatingPasswordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+			if (!delegatingPasswordEncoder.matches(tokens[1], clientDetails.getClientSecret())) {
 				throw new InvalidClientException("Given client ID does not match authenticated client");
-
 			}
 
 			TokenRequest tokenRequest = new TokenRequest(MapUtil.newHashMap(), clientId, clientDetails.getScope(), "mobile");

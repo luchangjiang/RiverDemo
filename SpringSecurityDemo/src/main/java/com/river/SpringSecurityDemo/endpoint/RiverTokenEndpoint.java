@@ -23,8 +23,10 @@ import cn.hutool.core.util.StrUtil;
 import com.river.SpringSecurityDemo.constant.CommonConstants;
 import com.river.SpringSecurityDemo.util.R;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.CacheManager;
 import org.springframework.http.HttpHeaders;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.security.oauth2.provider.token.TokenStore;
@@ -40,9 +42,9 @@ import org.springframework.web.servlet.ModelAndView;
 @AllArgsConstructor
 @RequestMapping("/token")
 public class RiverTokenEndpoint {
-	/*private final TokenStore tokenStore;
-	private final CacheManager cacheManager;*/
-
+	private final TokenStore tokenStore;
+	private final CacheManager cacheManager;
+	private final PasswordEncoder passwordEncoder;
 	/**
 	 * 认证页面
 	 *
@@ -55,16 +57,22 @@ public class RiverTokenEndpoint {
 		return modelAndView;
 	}
 
-	@GetMapping("/test")
-	public R require(String username, String password) {
-		return R.ok(username);
+	/**
+	 * 加密
+	 *
+	 * @param plainText  原文
+	 * @return
+	 */
+	@GetMapping("/passwordEncoder/{plainText}")
+	public R<String> getPasswordEncoder(@PathVariable String plainText){
+		return R.ok(passwordEncoder.encode(plainText));
 	}
 
 	/**
 	 * 退出token
 	 *
 	 * @param authHeader Authorization
-	 *//*
+	 */
 	@DeleteMapping("/logout")
 	public R logout(@RequestHeader(value = HttpHeaders.AUTHORIZATION, required = false) String authHeader) {
 		if (StrUtil.isBlank(authHeader)) {
@@ -84,23 +92,22 @@ public class RiverTokenEndpoint {
 		}
 
 		OAuth2Authentication auth2Authentication = tokenStore.readAuthentication(accessToken);
-		cacheManager.getCache("user_details")
-				.evict(auth2Authentication.getName());
+		cacheManager.getCache("user_details").evict(auth2Authentication.getName());
 		tokenStore.removeAccessToken(accessToken);
 		return new R<>(Boolean.TRUE);
 	}
 
-	*//**
+	/**
 	 * 令牌管理调用
 	 *
 	 * @param token token
 	 * @return
-	 *//*
+	 */
 	@DeleteMapping("/{token}")
 	public R<Boolean> delToken(@PathVariable("token") String token) {
 		OAuth2AccessToken oAuth2AccessToken = tokenStore.readAccessToken(token);
 		tokenStore.removeAccessToken(oAuth2AccessToken);
 		return new R<>();
-	}*/
+	}
 
 }

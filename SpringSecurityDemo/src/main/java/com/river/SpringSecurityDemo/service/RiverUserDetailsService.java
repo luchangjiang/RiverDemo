@@ -33,7 +33,7 @@ public class RiverUserDetailsService implements UserDetailsService {
       1. commaSeparatedStringToAuthorityList放入角色时需要加前缀ROLE_，而在controller使用时不需要加ROLE_前缀
       2. 放入的是权限时，不能加ROLE_前缀，hasAuthority与放入的权限名称对应即可
     */
-        String password = passwordEncoder.encode("123");
+        String password = passwordEncoder.encode("123456");
 
         List<UserDetails> userDetailsList = new ArrayList<>();
         userDetailsList.add(User.builder()

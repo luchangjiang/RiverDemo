@@ -9,6 +9,8 @@ import com.river.SpringSecurityDemo.service.RiverUserDetailsService;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.Cache;
+import org.springframework.cache.CacheManager;
 import org.springframework.context.annotation.*;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -22,6 +24,7 @@ import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 import javax.sql.DataSource;
+import java.util.Collection;
 
 /**
  * @author ：River
@@ -36,14 +39,6 @@ import javax.sql.DataSource;
 @Configuration
 @AllArgsConstructor
 class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-
-    @Autowired
-    private DataSource dataSource;
-
-    /*@Lazy
-    @Autowired
-    private AuthorizationServerTokenServices defaultAuthorizationServerTokenServices;*/
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -80,12 +75,12 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Bean
     public AuthenticationSuccessHandler riverAuthenticationSuccessHandler() {
-        return RiverAuthenticationSuccessHandler.builder()
+        return new RiverAuthenticationSuccessHandler();
+        /*return RiverAuthenticationSuccessHandler.builder()
                 .objectMapper(objectMapper())
-                .clientDetailsService(myClientDetailService())
+                .clientDetailsService(riverClientDetailsService)
                 .passwordEncoder(passwordEncoder())
-//                .defaultAuthorizationServerTokenServices(defaultAuthorizationServerTokenServices)
-                .build();
+                .build();*/
     }
 
     /**
@@ -116,7 +111,6 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-
     /**
      * 用户服务.
      *
@@ -125,16 +119,6 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public RiverUserDetailsService myUserDetailService() {
         return new RiverUserDetailsService();
-    }
-
-    /**
-     * 客户端服务.
-     *
-     * @return
-     */
-    @Bean
-    public RiverClientDetailsService myClientDetailService() {
-        return new RiverClientDetailsService(dataSource);
     }
 
     @Bean
