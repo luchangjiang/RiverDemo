@@ -1,3 +1,5 @@
+
+
 logging:
   file: /${project.name}/logs/postgres.log
   level:
@@ -11,10 +13,27 @@ server:
   port: 8078
 spring:
   datasource:
-    password: 123456
-    platform: postgres
-    url: jdbc:postgresql://localhost:5432/postgres?currentSchema=murugar
+    type: com.alibaba.druid.pool.DruidDataSource
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/postgres?currentSchema=murugar&characterEncoding=UTF-8&useSSL=false
     username: postgres
+    password: 123456
+    druid:
+      #初始化连接大小
+      initial-size: 8
+      #最小空闲连接数
+      min-idle: 5
+      #最大连接数
+      max-active: 10
+      #查询超时时间
+      query-timeout: 6000
+      #事务查询超时时间
+      transaction-query-timeout: 6000
+      #关闭空闲连接超时时间
+      remove-abandoned-timeout: 1800
+      filters: stat,config
+  jackson:
+    time-zone: GMT+8
 
 swagger:
   # 是否启用swagger，默认：true

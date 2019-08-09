@@ -23,7 +23,7 @@ import java.io.IOException;
 public class RiverUserNameAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 
     public RiverUserNameAuthenticationFilter() {
-        super(new AntPathRequestMatcher("/mobile/token", "GET"));
+        super(new AntPathRequestMatcher("/oauth/token", "GET"));
     }
 
     @Override

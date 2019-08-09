@@ -4,7 +4,7 @@
 
     <resultMap id="book" type="com.river.postgres.model.entity.Book">
         <id property="id" column="id"/>
-        <result property="name" column="name"/>
+        <result property="bookName" column="book_name"/>
         <result property="author" column="author"/>
         <result property="price" column="price"/>
         <result property="topic" column="topic"/>
@@ -14,7 +14,7 @@
 
     <resultMap id="bookWithBookStore" type="com.river.postgres.model.entity.BookWithBookStore">
         <id property="id" column="id"/>
-        <result property="name" column="name"/>
+        <result property="bookName" column="book_name"/>
         <result property="author" column="author"/>
         <result property="price" column="price"/>
         <result property="topic" column="topic"/>
@@ -25,16 +25,16 @@
 
     <insert id="insertBook" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO
-          book (book_store_id, name, author, price, topic, publish_date)
+          book (book_store_id, book_name, author, price, topic, publish_date)
         VALUES
-          (#{bookStoreId}, #{name}, #{author}, #{price}, #{topic}, #{publishDate})
+          (#{bookStoreId}, #{bookName}, #{author}, #{price}, #{topic}, #{publishDate})
     </insert>
 
     <update id="updateBookOnNameById">
         UPDATE
           book
         SET
-          name = #{name}
+          book_name = #{bookName}
         WHERE
           id = #{id}
     </update>

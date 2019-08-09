@@ -24,7 +24,6 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -44,7 +43,7 @@ public class Book extends Model<Book> {
     @TableId
     private Integer id;
     @ApiModelProperty(value="书名")
-    private String name;
+    private String bookName;
 
     @ApiModelProperty(value="作者")
     private String author;
@@ -57,6 +56,9 @@ public class Book extends Model<Book> {
 
     @ApiModelProperty(value="出版日期")
     private Date publishDate;
+
+    @ApiModelProperty(value="创建时间")
+    private Date createTime;
 
     @ApiModelProperty(value="书店id")
     private Long bookStoreId;

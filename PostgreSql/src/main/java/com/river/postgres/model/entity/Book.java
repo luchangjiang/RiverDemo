@@ -22,7 +22,7 @@ public class Book implements Serializable {
     private Long id;
 
     @ApiModelProperty(value="书名", required = true)
-    private String name;
+    private String bookName;
 
     @ApiModelProperty(value="作者", required = true)
     private String author;

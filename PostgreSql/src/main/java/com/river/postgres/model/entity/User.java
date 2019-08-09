@@ -25,5 +25,4 @@ public class User implements Serializable {
 
     @ApiModelProperty(value="用户密码", required = true)
     private String password;
-
 }
