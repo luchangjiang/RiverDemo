@@ -1,7 +1,7 @@
-package cn.felord.mockspringboot.api;
+package com.river.mockspringboot.api;
 
-import cn.felord.mockspringboot.entity.Book;
-import cn.felord.mockspringboot.service.BookService;
+import com.river.mockspringboot.entity.Book;
+import com.river.mockspringboot.service.BookService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

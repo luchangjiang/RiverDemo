@@ -1,7 +1,7 @@
-package cn.felord.mockspringboot.service.impl;
+package com.river.mockspringboot.service.impl;
 
-import cn.felord.mockspringboot.entity.Book;
-import cn.felord.mockspringboot.service.BookService;
+import com.river.mockspringboot.entity.Book;
+import com.river.mockspringboot.service.BookService;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -17,9 +17,9 @@ public class BookServiceImpl implements BookService {
     @Override
     public Book queryByTitle(String title) {
         Book book = new Book();
-        book.setAuthor("dax");
-        book.setPrice(78.56);
-        book.setReleaseTime(LocalDate.of(2018, 3, 22));
+        book.setAuthor("tom");
+        book.setPrice(77.56);
+        book.setReleaseTime(LocalDate.of(2018, 7, 4));
         book.setTitle(title);
         return book;
     }

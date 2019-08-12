@@ -1,4 +1,4 @@
-package cn.felord.mockspringboot.entity;
+package com.river.mockspringboot.entity;
 
 import lombok.Data;
 

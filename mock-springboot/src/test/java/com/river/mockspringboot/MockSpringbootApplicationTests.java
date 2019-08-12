@@ -1,7 +1,7 @@
-package cn.felord.mockspringboot;
+package com.river.mockspringboot;
 
-import cn.felord.mockspringboot.entity.Book;
-import cn.felord.mockspringboot.service.BookService;
+import com.river.mockspringboot.entity.Book;
+import com.river.mockspringboot.service.BookService;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -51,8 +51,8 @@ public class MockSpringbootApplicationTests {
         String title = "java learning";
         bookServiceMockBean(title);
 
-
-        Assertions.assertThat(bookService.queryByTitle("ss").getTitle()).isEqualTo(title);
+        Book book = bookService.queryByTitle("ss");
+        Assertions.assertThat(book.getTitle()).isEqualTo(title);
 
     }
 

@@ -1,4 +1,4 @@
-package cn.felord.mockspringboot;
+package com.river.mockspringboot;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,6 +1,6 @@
-package cn.felord.mockspringboot.service;
+package com.river.mockspringboot.service;
 
-import cn.felord.mockspringboot.entity.Book;
+import com.river.mockspringboot.entity.Book;
 
 /**
  * The interface Book service.
