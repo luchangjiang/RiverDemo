@@ -1,0 +1,6 @@
+server:
+  port: 8054
+
+jasypt:
+  encryptor:
+    password: pigx

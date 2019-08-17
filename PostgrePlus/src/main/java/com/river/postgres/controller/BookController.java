@@ -16,6 +16,7 @@
  */
 package com.river.postgres.controller;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.river.postgres.entity.Book;
@@ -29,6 +30,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * dfd
@@ -52,7 +54,7 @@ public class BookController {
      */
     @ApiOperation(value="获取图书清单", notes = "分页获取图书清单")
     @GetMapping("/page" )
-    public R getBookPage(Page page, Book book) {
+    public R<IPage<Book>> getBookPage(Page page, Book book) {
         return R.ok(bookService.page(page, Wrappers.query(book)));
     }
 
@@ -64,7 +66,7 @@ public class BookController {
     @ApiOperation(value="按id获取图书详情", notes = "通过id获取图书的详细信息")
     @ApiImplicitParams({@ApiImplicitParam(name = "id", value = "图书ID", required = true)})
     @GetMapping("/{id}" )
-    public R getById(@Valid @PathVariable("id" ) Integer id) {
+    public R<Book> getById(@Valid @PathVariable("id" ) Integer id) {
         return R.ok(bookService.getById(id));
     }
 
@@ -77,7 +79,7 @@ public class BookController {
     //@PreAuthorize("@pms.hasPermission('murugar_book_add')" )
     @ApiOperation(value="添加图书", notes = "添加图书信息")
     @PostMapping
-    public R save(@Valid @RequestBody Book book) {
+    public R<Boolean> save(@Valid @RequestBody Book book) {
         return R.ok(bookService.save(book));
     }
 
@@ -90,7 +92,7 @@ public class BookController {
     //@PreAuthorize("@pms.hasPermission('murugar_book_edit')" )
     @ApiOperation(value="修改图书", notes = "修改图书信息")
     @PutMapping
-    public R updateById(@Valid @RequestBody Book book) {
+    public R<Boolean> updateById(@Valid @RequestBody Book book) {
         return R.ok(bookService.updateById(book));
     }
 
@@ -103,7 +105,7 @@ public class BookController {
     //@PreAuthorize("@pms.hasPermission('murugar_book_del')" )
     @ApiOperation(value="删除图书", notes = "删除图书信息")
     @DeleteMapping("/{id}" )
-    public R removeById(@Valid @PathVariable Integer id) {
+    public R<Boolean> removeById(@Valid @PathVariable Integer id) {
         return R.ok(bookService.removeById(id));
     }
 
