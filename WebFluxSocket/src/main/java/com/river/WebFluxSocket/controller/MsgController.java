@@ -28,9 +28,4 @@ public class MsgController {
             return String.format("Connection of id '%s' doesn't exist", id);
         }
     }
-
-    @GetMapping("/echo")
-    public String echo(Model model){
-        return "echo.html";
-    }
 }
