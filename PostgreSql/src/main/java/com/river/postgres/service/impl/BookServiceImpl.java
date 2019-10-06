@@ -45,7 +45,7 @@ public class BookServiceImpl implements BookService {
         return bookMapper
                 .selectAllBooks()
                 .stream()
-                .map(Book::getName)
+                .map(Book::getBookName)
                 .collect(Collectors.toList());
     }
 

@@ -4,9 +4,10 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.validation.Validator;
+
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
-import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 import java.math.BigDecimal;
 import java.util.Iterator;
