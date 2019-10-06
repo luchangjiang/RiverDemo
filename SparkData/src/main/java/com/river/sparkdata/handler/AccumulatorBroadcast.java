@@ -45,7 +45,7 @@ public class AccumulatorBroadcast {
 	 * @param sparkContext
 	 *            contains the instance of 'JavaSparkContext' from calling method.
 	 */
-	AccumulatorBroadcast(JavaSparkContext sparkContext) {
+	public AccumulatorBroadcast(JavaSparkContext sparkContext) {
 		this.sparkContext = sparkContext;
 	}
 
@@ -55,7 +55,7 @@ public class AccumulatorBroadcast {
 	 * 
 	 */
 
-	public void call() {
+	public static void accumulator(JavaSparkContext sparkContext) {
 
 		/* Setting and Initializing Accumulator Variables. */
 		Accumulator<Integer> accUS = sparkContext.accumulator(0);
@@ -69,7 +69,6 @@ public class AccumulatorBroadcast {
 
 		/* Creating JavaRDD of String from cars.csv and caching to memory. */
 		JavaRDD<String> carData = sparkContext.textFile(Constants.CARS_FILE).cache();
-
 		/**
 		 * Class CountOrigin is consists of a function 'call()' which counts the
 		 * car models.
@@ -87,7 +86,7 @@ public class AccumulatorBroadcast {
 			/**
 			 * Function 'call()' counts the car models according to their origin
 			 * 
-			 * @param s
+			 * @param record
 			 *            single record from JavaRDD carData
 			 */
 			public String call(String record) {
@@ -107,7 +106,7 @@ public class AccumulatorBroadcast {
 		}
 
 		/* Creating CountOrgin object */
-		CountOrigin countOrigin = new CountOrigin();
+//		CountOrigin countOrigin = new CountOrigin();
 
 		/*
 		 * Calling map transformation on cardData. For each record in carData
@@ -116,7 +115,9 @@ public class AccumulatorBroadcast {
 		 * respective origins. Variable count contains the count of total no. of
 		 * records in carData.
 		 */
-		long count = carData.map(x -> countOrigin.call(x)).count();
+		JavaRDD<String> countData = carData.map(new CountOrigin());
+		long count = countData.count()-1;
+//		long count = carData.map(x -> countOrigin.call(x)).count();
 
 		/* Printing the results */
 		System.out.println("(AccumulatorBroadcast)Total Count: " + count + "\n US: " + accUS.value() + " Europe: " + accEuro.value()

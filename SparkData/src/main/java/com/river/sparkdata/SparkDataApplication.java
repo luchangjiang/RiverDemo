@@ -86,6 +86,9 @@ public class SparkDataApplication {
 		Functions.example1(sparkContext);
 		Functions.example2(sparkContext);
 
+        /*AccumulatorBroadcast*/
+        AccumulatorBroadcast.accumulator(sparkContext);
+
 		/* Key Value RDD. */
 		KeyValueRDD keyValueRdd = new KeyValueRDD(sparkContext);
 		keyValueRdd.callKVRDD();
