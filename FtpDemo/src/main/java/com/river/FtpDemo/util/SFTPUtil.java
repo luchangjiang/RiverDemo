@@ -1,4 +1,4 @@
-package com.river.FtpDemo;
+package com.river.FtpDemo.util;
 
 import java.io.File;
 import java.io.FileInputStream;

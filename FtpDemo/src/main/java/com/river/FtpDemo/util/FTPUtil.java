@@ -1,4 +1,4 @@
-package com.river.FtpDemo;
+package com.river.FtpDemo.util;
 
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
