@@ -98,7 +98,7 @@ public class SparkFlatMap {
 		JavaRDD<String> words = audiData.flatMap(s -> Arrays.asList(s.split("Eu")));
 
 		/* Printing first 10 records in JavaRDD words */
-		words.take(10).forEach(x -> System.out.println("(SparkFlatMap)" + x));
+		words.take(10).forEach(x -> System.out.println("(SparkFlatMap)Split1: " + x));
 
 		/*
 		 * FlatMap operation is performed on audiData by splitting each record
@@ -107,7 +107,7 @@ public class SparkFlatMap {
 		JavaRDD<String> words1 = audiData.flatMap(s -> Arrays.asList(s.split(",")));
 
 		/* Printing first 10 records in JavaRDD words1 */
-		words1.take(10).forEach(x -> System.out.println("(SparkFlatMap)" + x));
+		words1.take(10).forEach(x -> System.out.println("(SparkFlatMap)Split2: " + x));
 
 		/* Printing total no.of records after each of the flatMap operation */
 		System.out.println("(SparkFlatMap) Count 1: " + words.count() + "\n(SparkFlatMap)Count 2: " + words1.count());

@@ -105,8 +105,7 @@ public class AccumulatorBroadcast {
 			}
 		}
 
-		/* Creating CountOrgin object */
-//		CountOrigin countOrigin = new CountOrigin();
+
 
 		/*
 		 * Calling map transformation on cardData. For each record in carData
@@ -117,6 +116,9 @@ public class AccumulatorBroadcast {
 		 */
 		JavaRDD<String> countData = carData.map(new CountOrigin());
 		long count = countData.count()-1;
+
+		/* Creating CountOrgin object */
+//		CountOrigin countOrigin = new CountOrigin();
 //		long count = carData.map(x -> countOrigin.call(x)).count();
 
 		/* Printing the results */
