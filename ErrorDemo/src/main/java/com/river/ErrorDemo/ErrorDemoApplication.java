@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * @program: RiverDemo
- * @description:
+ * @description:  模拟 NoClassDefFoundError
  * @author: River
  * @create: 2019-10-20 21:17
  **/

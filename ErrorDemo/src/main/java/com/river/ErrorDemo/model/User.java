@@ -13,7 +13,7 @@ public class User {
         this.USER_ID = id;
     }
     private static String getUserId() {
-        throw new RuntimeException("UserId Not found");
-//        return "ok";
+//        throw new RuntimeException("UserId Not found");
+        return "ok";
     }
 }
