@@ -5,6 +5,8 @@
     <packaging>pom</packaging>
     <modules>
         <module>ErrorDemo</module>
+        <module>FlinkDemo</module>
+        <module>tupleDemo</module>
     </modules>
     <parent>
 		<groupId>org.springframework.boot</groupId>
