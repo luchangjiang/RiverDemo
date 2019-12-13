@@ -15,7 +15,7 @@ import org.apache.flink.util.Collector;
  * @create: 2019-10-27 10:52
  **/
 public class SocketTextStreamWordCount {
-    public static void main(String[] args) throws Exception {
+    /*public static void main(String[] args) throws Exception {
         String hostName = "127.0.0.1";
         int port = 9000;
         // 设置运行环境
@@ -42,5 +42,5 @@ public class SocketTextStreamWordCount {
                 }
             }
         }
-    }
+    }*/
 }

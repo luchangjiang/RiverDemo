@@ -25,16 +25,16 @@ import org.apache.flink.util.Collector;
  *
  */
 public class SocketWindowWordCount {
-    public static void main(String[] args) throws Exception{
+    /*public static void main(String[] args) throws Exception{
         //连接端口号
         final int port=9000;
-        /*try {
+        *//*try {
             final ParameterTool params = ParameterTool.fromArgs(args);
             port = params.getInt("port");
         } catch (Exception e) {
             System.out.println("No port specified. Please run 'SocketWindowWordCount --port <port>'");
             return ;
-        }*/
+        }*//*
         //获取执行环节
         final StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
 
@@ -66,7 +66,7 @@ public class SocketWindowWordCount {
 
         env.execute("Socket Window WordCount");
 
-    }
+    }*/
 
 }
 

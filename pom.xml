@@ -7,6 +7,7 @@
         <module>ErrorDemo</module>
         <module>FlinkDemo</module>
         <module>tupleDemo</module>
+        <module>PowerMock</module>
     </modules>
     <parent>
 		<groupId>org.springframework.boot</groupId>
