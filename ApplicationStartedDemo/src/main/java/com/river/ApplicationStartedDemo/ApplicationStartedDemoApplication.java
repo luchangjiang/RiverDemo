@@ -9,6 +9,8 @@ import org.springframework.boot.web.context.WebServerInitializedEvent;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.event.EventListener;
 
+import javax.annotation.PostConstruct;
+
 @Slf4j
 @SpringBootApplication
 public class ApplicationStartedDemoApplication {
@@ -61,4 +63,15 @@ public class ApplicationStartedDemoApplication {
 		log.info("......ApplicationFailedEvent2......");
 	}
 
+	@PostConstruct
+	public void PostConstructDemo(){
+		log.info(".....PostConstruct......");
+	}
+
+	@Bean
+	public ParamInfo paramInfo(){
+		log.info(".....Bean generate......");
+		return new ParamInfo();
+
+	}
 }
