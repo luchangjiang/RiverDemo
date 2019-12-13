@@ -26,11 +26,23 @@ public class MockServiceImplTest {
      * mock普通方法
      */
     @Test
-    public void testSelectAppAdvertisementList() {
+    public void testCount() {
         MockModel model = new MockModel();
         PowerMockito.when(mockMapper.count(model)).thenReturn(2);
 
         Assert.assertEquals(2, mockService.count(model));
+    }
+
+    /**
+     * mock普通方法
+     */
+    @Test
+    public void testModel() {
+        MockModel model = new MockModel();
+        model.setName("bb");
+        PowerMockito.when(mockMapper.getModel("aa")).thenReturn(model);
+
+        Assert.assertEquals("bb", mockService.getModel("aa").getName());
     }
 
     @Test

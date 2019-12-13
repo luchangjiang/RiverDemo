@@ -7,5 +7,7 @@ package com.river.powermock;
  * @create: 2019-12-13 21:46
  **/
 public interface MockMapper {
-    public int count(MockModel model);
+    int count(MockModel model);
+
+    MockModel getModel(String name);
 }

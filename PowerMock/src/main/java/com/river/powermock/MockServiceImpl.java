@@ -22,6 +22,11 @@ public class MockServiceImpl implements MockService {
     }
 
     @Override
+    public MockModel getModel(String name){
+        return mockMapper.getModel(name);
+    }
+
+    @Override
     public boolean makeFile(String path) {
         File file = new File(path);
         return file.exists();
