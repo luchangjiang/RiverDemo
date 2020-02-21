@@ -1,0 +1,24 @@
+server:
+  port: 8083
+
+spring:
+  rabbitmq:
+    host: 52.221.180.102     #### MQ地址
+    port: 5672
+    username: admin                 #### MQ用户名
+    password: rabbit@admin123                #### MQ密码
+#    host: 10.10.11.25     #### MQ地址
+#    port: 5672
+#    username: river
+#    password: river
+    publisher-confirms: true
+    publisher-returns: true
+    virtual-host: /
+    listener:
+      direct:
+        acknowledge-mode: manual
+      simple:
+        acknowledge-mode: manual
+
+
+

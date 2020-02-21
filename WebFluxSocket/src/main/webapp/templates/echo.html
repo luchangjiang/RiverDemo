@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="text/html;charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <link rel="stylesheet" href="/css/talk.css">
+</head>
+<body>
+收到的信息：
+<div id="content"></div>
+</body>
+<script type="text/javascript" src="/js/jquery-3.1.1.js"></script>
+<script type="text/javascript" src="/js/sockjs.min.js"></script>
+<script type="text/javascript" src="/js/stomp.js"></script>
+<script type="text/javascript" src="/js/common.js"></script>
+<script type="text/javascript">
+
+    var websocket= new WebSocket("ws://localhost:8080/echo?id=123");
+
+    websocket.onopen = function(event) {
+        console.log("WebSocket:已连接");
+        console.log(event);
+    };
+    websocket.onmessage = function(event) {
+        console.log("WebSocket:收到一条消息",event.data);
+        $("#content").append("<p>"+event.data +"</p>");
+        scrollToBottom();
+    };
+    websocket.onerror = function(event) {
+        console.log("WebSocket:发生错误 ");
+        console.log(event);
+    };
+    websocket.onclose = function(event) {
+        console.log("WebSocket:已关闭");
+        console.log(event);
+    }
+
+</script>
+
+</html>

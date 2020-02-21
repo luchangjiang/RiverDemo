@@ -1,0 +1,37 @@
+Manifest-Version: 1.0
+Premain-Class: com.river.agent.stack.MyAgent
+Can-Redefine-Classes: true
+Class-Path: spring-security-rsa-1.0.7.RELEASE.jar javax.annotation-api
+ -1.3.2.jar logback-core-1.2.3.jar spring-boot-starter-2.1.3.RELEASE.j
+ ar spring-webmvc-5.1.5.RELEASE.jar attoparser-2.0.5.RELEASE.jar sprin
+ g-cloud-starter-2.1.1.RELEASE.jar jackson-datatype-jdk8-2.9.8.jar thy
+ meleaf-3.0.11.RELEASE.jar jackson-annotations-2.9.0.jar micrometer-co
+ re-1.1.3.jar snakeyaml-1.23.jar tomcat-embed-el-9.0.16.jar spring-boo
+ t-actuator-2.1.3.RELEASE.jar spring-context-5.1.5.RELEASE.jar bcprov-
+ jdk15on-1.60.jar spring-boot-starter-actuator-2.1.3.RELEASE.jar sprin
+ g-security-crypto-5.1.4.RELEASE.jar spring-aop-5.1.5.RELEASE.jar vali
+ dation-api-2.0.1.Final.jar spring-boot-starter-web-2.1.3.RELEASE.jar 
+ spring-security-web-5.1.4.RELEASE.jar thymeleaf-extras-java8time-3.0.
+ 3.RELEASE.jar unbescape-1.1.6.RELEASE.jar spring-core-5.1.5.RELEASE.j
+ ar spring-boot-2.1.3.RELEASE.jar LatencyUtils-2.0.3.jar spring-cloud-
+ starter-security-2.1.2.RELEASE.jar hibernate-validator-6.0.14.Final.j
+ ar jboss-logging-3.3.2.Final.jar spring-expression-5.1.5.RELEASE.jar 
+ jackson-databind-2.9.8.jar spring-boot-starter-json-2.1.3.RELEASE.jar
+  log4j-to-slf4j-2.11.2.jar spring-boot-autoconfigure-2.1.3.RELEASE.ja
+ r spring-jcl-5.1.5.RELEASE.jar spring-boot-starter-logging-2.1.3.RELE
+ ASE.jar spring-security-core-5.1.4.RELEASE.jar spring-boot-starter-to
+ mcat-2.1.3.RELEASE.jar spring-cloud-security-2.1.2.RELEASE.jar spring
+ -cloud-commons-2.1.1.RELEASE.jar spring-boot-starter-security-2.1.3.R
+ ELEASE.jar tomcat-embed-core-9.0.16.jar spring-web-5.1.5.RELEASE.jar 
+ log4j-api-2.11.2.jar spring-boot-actuator-autoconfigure-2.1.3.RELEASE
+ .jar jackson-core-2.9.8.jar HdrHistogram-2.1.9.jar tomcat-embed-webso
+ cket-9.0.16.jar spring-messaging-5.1.5.RELEASE.jar logback-classic-1.
+ 2.3.jar spring-cloud-context-2.1.1.RELEASE.jar spring-beans-5.1.5.REL
+ EASE.jar bcpkix-jdk15on-1.60.jar jul-to-slf4j-1.7.25.jar spring-boot-
+ starter-thymeleaf-2.1.3.RELEASE.jar thymeleaf-spring5-3.0.11.RELEASE.
+ jar classmate-1.4.0.jar jackson-datatype-jsr310-2.9.8.jar spring-secu
+ rity-config-5.1.4.RELEASE.jar spring-websocket-5.1.5.RELEASE.jar jack
+ son-module-parameter-names-2.9.8.jar spring-boot-starter-websocket-2.
+ 1.3.RELEASE.jar slf4j-api-1.7.25.jar
+Main-Class: com.river.agent.stack.test.ApiStackTest
+

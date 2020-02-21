@@ -1,0 +1,5 @@
+com\river\FinkDemo\WordCount$LineSplitter.class
+com\river\FinkDemo\WordCount.class
+com\river\FinkDemo\SocketWindowWordCount.class
+com\river\FinkDemo\WordWithCount.class
+com\river\FinkDemo\SocketTextStreamWordCount.class

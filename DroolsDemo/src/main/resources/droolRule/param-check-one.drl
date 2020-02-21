@@ -1,0 +1,45 @@
+package droolRule ;
+import com.river.DroolsDemo.entity.ParamDTO ;
+import com.river.DroolsDemo.entity.RuleResult;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import com.river.DroolsDemo.service.ParamInfoService
+import com.river.DroolsDemo.util.SpringContextUtil
+import com.river.DroolsDemo.entity.ParamInfo
+import java.util.Date ;
+import java.util.Map;
+
+dialect  "java"
+global ParamInfoService paramInfoService;
+
+function void writeLog(String operate){
+    final Logger LOGGER = LoggerFactory.getLogger("param-check-one 规则引擎") ;
+    LOGGER.info("参数:operate="+operate);
+}
+
+rule "operate+"
+    when
+        $obj : Object();
+        $map : Map();
+        paramInfo : ParamInfo($map.get("paramInfo") != $obj&&operate=="+")
+//        paramInfoService : ParamInfoService($map.get("paramInfoService")!= $obj);
+    then
+        writeLog(paramInfo.getOperate());
+
+        paramInfo.setResult(paramInfo.getParamA() + paramInfo.getParamB());
+        paramInfoService.insertParam(paramInfo);
+
+end
+
+/*
+rule "operate-"
+    when
+        $map : Map();
+        paramInfo : ParamInfo($map.get("paramInfo"));
+        paramInfoService : ParamInfoService($map.get("paramInfoService"));
+    then
+        writeLog(paramInfo.getOperate());
+
+        paramInfo.setResult(paramInfo.getParamA() + paramInfo.getParamB());
+        paramInfoService.insertParam(paramInfo);
+end*/
