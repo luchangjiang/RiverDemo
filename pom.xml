@@ -8,6 +8,10 @@
         <module>FlinkDemo</module>
         <module>tupleDemo</module>
         <module>PowerMock</module>
+        <module>I18nDemo</module>
+        <module>FactoryBean</module>
+        <module>DatawayDemo</module>
+        <module>SpringSecurity-Swagger</module>
     </modules>
     <parent>
 		<groupId>org.springframework.boot</groupId>

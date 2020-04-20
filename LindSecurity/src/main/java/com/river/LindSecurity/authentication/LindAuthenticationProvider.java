@@ -49,7 +49,6 @@ public class LindAuthenticationProvider extends AbstractUserDetailsAuthenticatio
                     "AbstractUserDetailsAuthenticationProvider.badCredentials",
                     "Bad credentials"));
         }
-
         String presentedPassword = authentication.getCredentials().toString();
 
         if (!passwordEncoder.matches(presentedPassword, userDetails.getPassword())) {

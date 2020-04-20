@@ -12,15 +12,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class JasyptDemoApplication {
 	public static void main(String[] args) {
 
-		SpringApplication.run(JasyptDemoApplication.class, args);
+//		SpringApplication.run(JasyptDemoApplication.class, args);
 
-		String salt  = "pigx";
+		String salt  = "xxxx";
 		BasicTextEncryptor basicTextEncryptor = new BasicTextEncryptor();
 		//加密所需的salt(盐)
 		basicTextEncryptor.setPassword(salt);
 		//要加密的数据（数据库的用户名或密码）
-		String username = basicTextEncryptor.encrypt("pig");
-		String password = basicTextEncryptor.encrypt("test");
+		String username = basicTextEncryptor.encrypt("root");
+		String password = basicTextEncryptor.encrypt("123456");
 		System.out.println("basic========================");
 		System.out.println("client-id:"+username);
 		System.out.println("client-secret:"+password);
@@ -29,8 +29,8 @@ public class JasyptDemoApplication {
 
 		strongTextEncryptor.setPassword(salt);
 		//要加密的数据（数据库的用户名或密码）
-		username = strongTextEncryptor.encrypt("pig");
-		password = strongTextEncryptor.encrypt("test");
+		username = strongTextEncryptor.encrypt("root");
+		password = strongTextEncryptor.encrypt("123456");
 		System.out.println("strong========================");
 		System.out.println("client-id:"+username);
 		System.out.println("client-secret:"+password);

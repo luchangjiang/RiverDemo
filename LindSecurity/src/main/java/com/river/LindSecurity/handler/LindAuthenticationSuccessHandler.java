@@ -21,6 +21,7 @@ import lombok.Builder;
 import lombok.extern.slf4j.Slf4j;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.oauth2.resource.OAuth2ResourceServerProperties;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -52,7 +53,8 @@ public class LindAuthenticationSuccessHandler implements AuthenticationSuccessHa
 	 * @param authentication the <tt>Authentication</tt> object which was created during
 	 */
 	@Override
-	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
+	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
+										Authentication authentication) throws IOException {
 		log.info("用户：{} 登录成功", request.getParameter("username"));
 		response.setCharacterEncoding(CharsetUtil.UTF_8);
 		response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);

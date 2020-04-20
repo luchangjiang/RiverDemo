@@ -12,11 +12,15 @@ project:
   name: postgres
 server:
   port: 8079
+
+jasypt:
+  encryptor:
+    password: xxxx
 spring:
   datasource:
-    password: 123456
+    password: ENC(IGqrU8qqv7En9WoQKVwQWQ==)
     platform: postgres
-    url: jdbc:postgresql://localhost:5432/postgres?currentSchema=murugar
+    url: jdbc:postgresql://localhost:5433/postgres?currentSchema=public
     username: postgres
 
 swagger:

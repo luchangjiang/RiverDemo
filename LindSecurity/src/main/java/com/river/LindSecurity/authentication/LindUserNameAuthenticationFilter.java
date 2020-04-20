@@ -26,7 +26,8 @@ public class LindUserNameAuthenticationFilter extends AbstractAuthenticationProc
     }
 
     @Override
-    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException, IOException, ServletException {
+    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
+            throws AuthenticationException, IOException, ServletException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
@@ -38,8 +39,8 @@ public class LindUserNameAuthenticationFilter extends AbstractAuthenticationProc
             throw new InternalAuthenticationServiceException("Failed to get the password");
         }
 
-        UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(
-                username, password);
+        UsernamePasswordAuthenticationToken authRequest =
+                new UsernamePasswordAuthenticationToken(username, password);
         authRequest.setDetails(authenticationDetailsSource.buildDetails(request));
         return this.getAuthenticationManager().authenticate(authRequest);
     }
