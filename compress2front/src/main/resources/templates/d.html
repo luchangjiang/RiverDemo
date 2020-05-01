@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <script type="text/javascript">
+        function getData(){
+            alert("OK");
+        }
+
+        function pakoData() {
+            $.ajax({
+                url: 'http://localhost:9000/compress/pakoGzip',
+                type:"POST",
+                success: function(rtn){
+                    $('#d2').text(pako_ungzip(rtn));
+                },
+                error: function (rtn) {
+                    alert("失败了");
+                }
+            });
+        }
+
+        //解压字符串
+        function pako_ungzip(str){
+            try{
+                var restored = pako.ungzip( str, { to: 'string' } );
+            }catch(err){
+                console.log("异常:"+err);
+            }
+            return restored;
+        }
+    </script>
+    <script src="../static/jquery-2.2.4.min.js"></script>
+    <script src="../static/pako.min.js"></script>
+</head>
+<body>
+
+<input type="button" onclick="getData()" value="数据">
+<input type="button" onclick="pakoData()" value="解压">
+<div id="d2"></div>
+
+</body>
+</html>
