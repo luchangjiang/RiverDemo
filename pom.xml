@@ -20,6 +20,7 @@
         <module>SensitivePlugin</module>
         <module>BeanFactoryDemo</module>
 		<module>GuavaRetryDemo</module>
+		<module>SpringBatchDemo</module>
 	</modules>
     <parent>
 		<groupId>org.springframework.boot</groupId>
