@@ -18,7 +18,9 @@
         <module>ProfileDemo</module>
         <module>ClassLoaderDemo</module>
         <module>SensitivePlugin</module>
-    </modules>
+        <module>BeanFactoryDemo</module>
+		<module>GuavaRetryDemo</module>
+	</modules>
     <parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
