@@ -14,12 +14,12 @@ public class JasyptDemoApplication {
 
 //		SpringApplication.run(JasyptDemoApplication.class, args);
 
-		String salt  = "xxxx";
+		String salt  = "pigx";
 		BasicTextEncryptor basicTextEncryptor = new BasicTextEncryptor();
 		//加密所需的salt(盐)
 		basicTextEncryptor.setPassword(salt);
 		//要加密的数据（数据库的用户名或密码）
-		String username = basicTextEncryptor.encrypt("root");
+		String username = basicTextEncryptor.encrypt("sales");
 		String password = basicTextEncryptor.encrypt("123456");
 		System.out.println("basic========================");
 		System.out.println("client-id:"+username);

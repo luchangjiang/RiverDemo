@@ -12,6 +12,13 @@
         <module>FactoryBean</module>
         <module>DatawayDemo</module>
         <module>SpringSecurity-Swagger</module>
+        <module>ObjectMapperDemo</module>
+        <module>ComputableFutureDemo</module>
+        <module>ChromeDriverDemo</module>
+        <module>InvokeDemo</module>
+        <module>IdigAgent</module>
+        <module>ClassLoaderDemo</module>
+        <module>ContextClassDemo</module>
     </modules>
     <parent>
 		<groupId>org.springframework.boot</groupId>

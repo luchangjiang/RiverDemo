@@ -43,7 +43,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/", "/index").permitAll()
+                .antMatchers("/", "/actuator/**", "/index").permitAll()
                 .antMatchers("/admin/**").hasRole("ADMIN")//按路由授权
                 .anyRequest().authenticated()
                 .and()
@@ -54,7 +54,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .failureHandler(lindAuthenticationFailHandler)
                 .permitAll()
                 .and()
-                .addFilterAt(lindAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class).authorizeRequests().and()
+                .addFilterAt(lindAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class).authorizeRequests()
+                .and()
                 .logout()
                 .permitAll();
     }

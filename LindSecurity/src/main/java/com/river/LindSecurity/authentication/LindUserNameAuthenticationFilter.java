@@ -22,7 +22,7 @@ import java.io.IOException;
 public class LindUserNameAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 
     public LindUserNameAuthenticationFilter() {
-        super(new AntPathRequestMatcher("/login", "GET"));
+        super(new AntPathRequestMatcher("/mobile/token/*", "POST"));
     }
 
     @Override

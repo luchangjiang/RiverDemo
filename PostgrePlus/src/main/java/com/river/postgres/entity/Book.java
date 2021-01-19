@@ -19,10 +19,12 @@ package com.river.postgres.entity;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
+import com.river.postgres.annotation.ShowLog;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.Date;
 
@@ -62,4 +64,9 @@ public class Book extends Model<Book> {
 
     @ApiModelProperty(value="书店id")
     private Long bookStoreId;
+
+    @ShowLog
+    public String getAuthor() {
+        return author;
+    }
 }
