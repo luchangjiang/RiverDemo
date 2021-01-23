@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.river</groupId>
-	<artifactId>LockDemo</artifactId>
+	<artifactId>com.river.thread.LockDemo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>LockDemo</name>
+	<name>com.river.thread.LockDemo</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>

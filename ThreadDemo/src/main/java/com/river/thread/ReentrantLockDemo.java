@@ -1,4 +1,6 @@
-import base.BaseDemo;
+package com.river.thread;
+
+import com.river.thread.base.BaseDemo;
 
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;

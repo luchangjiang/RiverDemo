@@ -224,7 +224,7 @@
             // Only deal with non-null/undefined values
             if ( ( options = arguments[ i ] ) != null ) {
 
-                // Extend the base object
+                // Extend the com.river.thread.base object
                 for ( name in options ) {
                     src = target[ name ];
                     copy = options[ name ];
@@ -9755,10 +9755,10 @@
             if ( support.createHTMLDocument ) {
                 context = document.implementation.createHTMLDocument( "" );
 
-                // Set the base href for the created document
+                // Set the com.river.thread.base href for the created document
                 // so any parsed elements with URLs
                 // are based on the document's URL (gh-2965)
-                base = context.createElement( "base" );
+                base = context.createElement( "com.river.thread.base" );
                 base.href = document.location.href;
                 context.head.appendChild( base );
             } else {

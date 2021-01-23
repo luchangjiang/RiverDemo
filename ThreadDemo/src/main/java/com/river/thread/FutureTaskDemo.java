@@ -1,21 +1,30 @@
-import base.MyTask;
+package com.river.thread;
+
+import com.river.thread.base.MyTask;
 
 import java.util.concurrent.*;
 
 /**
  * @author ：River
- * @date ：Created in 7/10/2019 9:01 AM
+ * @date ：Created in 7/10/2019 9:26 AM
  * @description：
  * @modified By：
  * @version: $
  */
-public class FutureDemo {
-
+public class FutureTaskDemo {
     public static void main(String[] args) {
+        //第一种方式
         ExecutorService executor = Executors.newCachedThreadPool();
         MyTask task = new MyTask();
-        Future<Integer> result = executor.submit(task);
+        FutureTask<Integer> futureTask = new FutureTask<Integer>(task);
+        executor.submit(futureTask);
         executor.shutdown();
+
+        //第二种方式，注意这种方式和第一种方式效果是类似的，只不过一个使用的是ExecutorService，一个使用的是Thread
+        /*Task task = new Task();
+        FutureTask<Integer> futureTask = new FutureTask<Integer>(task);
+        Thread thread = new Thread(futureTask);
+        thread.start();*/
 
         try {
             Thread.sleep(1000);
@@ -26,7 +35,7 @@ public class FutureDemo {
         System.out.println("主线程在执行任务");
 
         try {
-            System.out.println("task运行结果"+result.get());
+            System.out.println("task运行结果"+futureTask.get());
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
@@ -36,7 +45,4 @@ public class FutureDemo {
         System.out.println("所有任务执行完毕");
     }
 }
-
-
-
 

@@ -1,4 +1,4 @@
-package CompletableFutureDemo;
+package com.river.thread.CompletableFutureDemo;
 
 import java.util.concurrent.CompletableFuture;
 

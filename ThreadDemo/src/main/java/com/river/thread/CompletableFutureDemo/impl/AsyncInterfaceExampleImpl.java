@@ -1,6 +1,6 @@
-package CompletableFutureDemo.impl;
+package com.river.thread.CompletableFutureDemo.impl;
 
-import CompletableFutureDemo.AsyncInterfaceExample;
+import com.river.thread.CompletableFutureDemo.AsyncInterfaceExample;
 
 import java.util.concurrent.CompletableFuture;
 
