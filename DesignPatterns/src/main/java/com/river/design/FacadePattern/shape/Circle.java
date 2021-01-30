@@ -1,0 +1,9 @@
+package com.river.design.FacadePattern.shape;
+
+public class Circle implements Shape {
+ 
+   @Override
+   public void draw() {
+      System.out.println("Circle::draw()");
+   }
+}
