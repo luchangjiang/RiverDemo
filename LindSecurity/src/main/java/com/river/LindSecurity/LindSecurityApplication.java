@@ -10,9 +10,12 @@ public class LindSecurityApplication {
 		SpringApplication.run(LindSecurityApplication.class, args);
 	}
 
+<<<<<<< HEAD
 	/*@Bean
 	MeterRegistryCustomizer<MeterRegistry> configurer(
 			@Value("${spring.application.name}") String applicationName) {
 		return (registry) -> registry.config().commonTags("application", applicationName);
 	}*/
+=======
+>>>>>>> 4e7d5be5383c4a2431cb4eacca62015123994f5c
 }

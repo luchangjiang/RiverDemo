@@ -3,10 +3,17 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
+<<<<<<< HEAD
       driverClassName: com.mysql.jdbc.Driver
       url: jdbc:mysql://127.0.0.1:3306/rule-engine?useUnicode=true&characterEncoding=UTF8&zeroDateTimeBehavior=convertToNull&useSSL=false
       username: root
       password: 123
+=======
+      driverClassName: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://127.0.0.1:3306/rule-engine?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF8&zeroDateTimeBehavior=convertToNull&useSSL=false
+      username: root
+      password: 123456
+>>>>>>> 4e7d5be5383c4a2431cb4eacca62015123994f5c
       initial-size: 10
       max-active: 100
       min-idle: 10

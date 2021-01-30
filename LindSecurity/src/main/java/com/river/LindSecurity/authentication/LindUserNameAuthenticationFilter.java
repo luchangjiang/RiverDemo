@@ -22,12 +22,20 @@ import java.io.IOException;
 public class LindUserNameAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 
     public LindUserNameAuthenticationFilter() {
+<<<<<<< HEAD
         super(new AntPathRequestMatcher("/mobile/token/*", "POST"));
     }
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
             throws AuthenticationException, IOException, ServletException {
+=======
+        super(new AntPathRequestMatcher("/login", "GET"));
+    }
+
+    @Override
+    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException, IOException, ServletException {
+>>>>>>> 4e7d5be5383c4a2431cb4eacca62015123994f5c
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
@@ -39,8 +47,13 @@ public class LindUserNameAuthenticationFilter extends AbstractAuthenticationProc
             throw new InternalAuthenticationServiceException("Failed to get the password");
         }
 
+<<<<<<< HEAD
         UsernamePasswordAuthenticationToken authRequest =
                 new UsernamePasswordAuthenticationToken(username, password);
+=======
+        UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(
+                username, password);
+>>>>>>> 4e7d5be5383c4a2431cb4eacca62015123994f5c
         authRequest.setDetails(authenticationDetailsSource.buildDetails(request));
         return this.getAuthenticationManager().authenticate(authRequest);
     }

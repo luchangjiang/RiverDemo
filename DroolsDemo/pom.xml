@@ -54,12 +54,20 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
+<<<<<<< HEAD
             <version>5.1.38</version>
+=======
+            <version>8.0.18</version>
+>>>>>>> 4e7d5be5383c4a2431cb4eacca62015123994f5c
         </dependency>
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid-spring-boot-starter</artifactId>
+<<<<<<< HEAD
             <version>1.1.13</version>
+=======
+            <version>1.1.20</version>
+>>>>>>> 4e7d5be5383c4a2431cb4eacca62015123994f5c
         </dependency>
         <!--<dependency>-->
             <!--<groupId>com.alibaba</groupId>-->

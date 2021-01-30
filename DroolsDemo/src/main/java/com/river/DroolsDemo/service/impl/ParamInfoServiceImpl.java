@@ -20,7 +20,13 @@ public class ParamInfoServiceImpl extends ServiceImpl<ParamInfoMapper, ParamInfo
     @Override
     public ParamInfo selectById (String paramId){
         ParamInfo paramInfo = paramInfoMapper.selectById(paramId) ;
+<<<<<<< HEAD
         LOGGER.info("ParamInfoServiceImpl-Sign：{}",paramInfo.getParamSign());
+=======
+        if(paramInfo != null) {
+            LOGGER.info("ParamInfoServiceImpl-Operate：{}", paramInfo.getOperate());
+        }
+>>>>>>> 4e7d5be5383c4a2431cb4eacca62015123994f5c
         return paramInfo ;
     }
 

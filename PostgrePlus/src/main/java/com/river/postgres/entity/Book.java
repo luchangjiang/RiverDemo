@@ -19,12 +19,18 @@ package com.river.postgres.entity;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
+<<<<<<< HEAD
 import com.river.postgres.annotation.ShowLog;
+=======
+>>>>>>> 4e7d5be5383c4a2431cb4eacca62015123994f5c
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+<<<<<<< HEAD
 import org.springframework.web.bind.annotation.GetMapping;
+=======
+>>>>>>> 4e7d5be5383c4a2431cb4eacca62015123994f5c
 
 import java.util.Date;
 
@@ -64,9 +70,12 @@ public class Book extends Model<Book> {
 
     @ApiModelProperty(value="书店id")
     private Long bookStoreId;
+<<<<<<< HEAD
 
     @ShowLog
     public String getAuthor() {
         return author;
     }
+=======
+>>>>>>> 4e7d5be5383c4a2431cb4eacca62015123994f5c
 }

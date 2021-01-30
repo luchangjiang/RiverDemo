@@ -2,10 +2,15 @@ package com.river.DroolsDemo.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+<<<<<<< HEAD
+=======
+import lombok.Data;
+>>>>>>> 4e7d5be5383c4a2431cb4eacca62015123994f5c
 
 import java.util.Date;
 
 @TableName("re_param_info")
+<<<<<<< HEAD
 public class ParamInfo {
 
     @TableId("id")
@@ -45,4 +50,17 @@ public class ParamInfo {
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
+=======
+@Data
+public class ParamInfo {
+
+    @TableId("id")
+    private Integer id ;
+    private String operate ;
+    private Integer paramA;
+    private Integer paramB;
+    private Integer result;
+    private Date createTime ;
+
+>>>>>>> 4e7d5be5383c4a2431cb4eacca62015123994f5c
 }

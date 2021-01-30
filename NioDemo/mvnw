@@ -163,7 +163,11 @@ fi
 CLASSWORLDS_LAUNCHER=org.codehaus.plexus.classworlds.launcher.Launcher
 
 # traverses directory structure from process work directory to filesystem root
+<<<<<<< HEAD
 # first directory with .mvn subdirectory is considered project com.river.thread.base directory
+=======
+# first directory with .mvn subdirectory is considered project base directory
+>>>>>>> 4e7d5be5383c4a2431cb4eacca62015123994f5c
 find_maven_basedir() {
 
   if [ -z "$1" ]
