@@ -1,0 +1,18 @@
+
+
+management:
+    #prometheus+grafana+springboot2º‡øÿºØ≥…≈‰÷√
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+      jmx:
+        enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+      base-path: /actuator
+      #prometheus+grafana+springboot2º‡øÿºØ≥…≈‰÷√
+server:
+  port: 5091

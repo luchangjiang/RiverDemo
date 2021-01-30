@@ -2,7 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.river.DroolsDemo.mapper.ParamInfoMapper" >
     <insert id="insertParam" parameterType="com.river.DroolsDemo.entity.ParamInfo" useGeneratedKeys="true" keyProperty="id" >
+<<<<<<< HEAD
+        insert into re_param_info (id, param_sign, create_time, update_time)
+        values (#{id,jdbcType=VARCHAR}, #{paramSign,jdbcType=VARCHAR},
+                #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+=======
         insert into re_param_info (operate, param_a, param_b, result, create_time)
         values (#{operate},#{paramA},#{paramB},#{result},#{createTime,jdbcType=TIMESTAMP})
+>>>>>>> 4e7d5be5383c4a2431cb4eacca62015123994f5c
     </insert>
 </mapper>

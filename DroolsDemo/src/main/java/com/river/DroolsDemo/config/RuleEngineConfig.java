@@ -8,7 +8,10 @@ import org.kie.api.builder.KieFileSystem;
 import org.kie.api.builder.KieRepository;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
+<<<<<<< HEAD
+=======
 import org.kie.api.runtime.StatelessKieSession;
+>>>>>>> 4e7d5be5383c4a2431cb4eacca62015123994f5c
 import org.kie.internal.io.ResourceFactory;
 import org.kie.spring.KModuleBeanFactoryPostProcessor;
 import org.springframework.context.annotation.Bean;
@@ -60,10 +63,13 @@ public class RuleEngineConfig {
         return kieContainer().newKieSession();
     }
     @Bean
+<<<<<<< HEAD
+=======
     public StatelessKieSession statelessKieSession() throws IOException {
         return kieContainer().newStatelessKieSession();
     }
     @Bean
+>>>>>>> 4e7d5be5383c4a2431cb4eacca62015123994f5c
     public KModuleBeanFactoryPostProcessor kiePostProcessor() {
         return new KModuleBeanFactoryPostProcessor();
     }

@@ -82,7 +82,11 @@ goto error
 
 :init
 
+<<<<<<< HEAD
+@REM Find the project com.river.thread.base dir, i.e. the directory that contains the folder ".mvn".
+=======
 @REM Find the project base dir, i.e. the directory that contains the folder ".mvn".
+>>>>>>> 4e7d5be5383c4a2431cb4eacca62015123994f5c
 @REM Fallback to current working directory if not found.
 
 set MAVEN_PROJECTBASEDIR=%MAVEN_BASEDIR%

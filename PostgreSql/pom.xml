@@ -78,7 +78,16 @@
 			<artifactId>swagger-spring-boot-starter</artifactId>
 			<version>${swagger.version}</version>
 		</dependency>
+<<<<<<< HEAD
+		<dependency>
+			<groupId>com.github.ulisesbocchio</groupId>
+			<artifactId>jasypt-spring-boot-starter</artifactId>
+			<version>2.1.1</version>
+		</dependency>
+    </dependencies>
+=======
 	</dependencies>
+>>>>>>> 4e7d5be5383c4a2431cb4eacca62015123994f5c
 
 	<build>
 		<plugins>

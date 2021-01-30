@@ -5,7 +5,11 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
+<<<<<<< HEAD
+		<version>2.1.6.RELEASE</version>
+=======
 		<version>2.3.4.RELEASE</version>
+>>>>>>> 4e7d5be5383c4a2431cb4eacca62015123994f5c
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.river</groupId>

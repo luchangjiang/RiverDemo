@@ -6,6 +6,10 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @EnableSwagger2
 @SpringBootApplication
+<<<<<<< HEAD
+//@EnableEncryptableProperties
+=======
+>>>>>>> 4e7d5be5383c4a2431cb4eacca62015123994f5c
 public class PostgreSqlApplication {
 
 	public static void main(String[] args) {
