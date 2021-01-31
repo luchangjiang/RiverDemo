@@ -1,8 +1,9 @@
 package com.river.design.AdapterPattern.mediaplayer;
 
+import com.river.design.AdapterPattern.mediaplayer.advanced.AdvancedMediaPlayer;
 import com.river.design.AdapterPattern.mediaplayer.advanced.MediaAdapter;
 
-public class AudioPlayer implements MediaPlayer {
+public class AudioPlayer implements AdvancedMediaPlayer.MediaPlayer {
    MediaAdapter mediaAdapter;
  
    @Override

@@ -21,7 +21,8 @@
         <module>BeanFactoryDemo</module>
 		<module>GuavaRetryDemo</module>
 		<module>SpringBatchDemo</module>
-	</modules>
+        <module>ConnectionPoolDemo</module>
+    </modules>
     <parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
