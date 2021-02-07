@@ -22,6 +22,7 @@
 		<module>GuavaRetryDemo</module>
 		<module>SpringBatchDemo</module>
         <module>ConnectionPoolDemo</module>
+        <module>HeartbeatServer</module>
     </modules>
     <parent>
 		<groupId>org.springframework.boot</groupId>
