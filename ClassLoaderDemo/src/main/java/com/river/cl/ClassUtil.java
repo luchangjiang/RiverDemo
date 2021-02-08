@@ -18,7 +18,7 @@ import java.util.jar.JarFile;
 public class ClassUtil {
 
     public static void main(String[] args) {
-        
+
         // 包下面的类
         Set<Class<?>> clazzs = getClasses("c:/pig/pigx");
         if (clazzs == null) {
@@ -75,7 +75,7 @@ public class ClassUtil {
                     if (file2.isDirectory()) {
                         getClasses(file2.getCanonicalPath());
                     } else {
-                        if(file2.getName().endsWith(".jar")) {
+                        if (file2.getName().endsWith(".jar")) {
                             // 如果是jar包文件
                             // 定义一个JarFile
                             // System.err.println("jar类型的扫描");
@@ -97,13 +97,13 @@ public class ClassUtil {
                                         name = name.substring(1);
                                     }
                                     // 如果前半部分和定义的包名相同
-                                    if (name.startsWith(packageDirName)) {
-                                        int idx = name.lastIndexOf('/');
-                                        // 如果以"/"结尾 是一个包
-                                        if (idx != -1) {
-                                            // 获取包名 把"/"替换成"."
-                                            packageName = name.substring(0, idx).replace('/', '.');
-                                        }
+                                    int idx = name.lastIndexOf('/');
+                                    // 如果以"/"结尾 是一个包
+                                    if (idx != -1) {
+                                        // 获取包名 把"/"替换成"."
+                                        packageName = name.substring(0, idx).replace('/', '.');
+                                    }
+                                    if (packageName.startsWith("com.pig4cloud")) {
                                         // 如果可以迭代下去 并且是一个包
                                         if ((idx != -1) || recursive) {
                                             // 如果是一个.class文件 而且不是目录
@@ -144,7 +144,7 @@ public class ClassUtil {
      * @param classes
      */
     public static void findAndAddClassesInPackageByFile(String packageName, String packagePath, final boolean recursive,
-            Set<Class<?>> classes) {
+                                                        Set<Class<?>> classes) {
         // 获取此包的目录 建立一个File
         File dir = new File(packagePath);
         // 如果不存在或者 也不是目录就直接返回
@@ -184,7 +184,7 @@ public class ClassUtil {
 
     // --------------------------------------------------------------------------------------------------------
 
-    @SuppressWarnings({ "rawtypes", "unchecked" })
+    @SuppressWarnings({"rawtypes", "unchecked"})
     public static Set<Class<?>> getByInterface(Class clazz, Set<Class<?>> classesAll) {
         Set<Class<?>> classes = new LinkedHashSet<Class<?>>();
         // 获取指定接口的实现类
