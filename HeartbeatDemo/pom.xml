@@ -12,5 +12,6 @@
     <groupId>com.river.heartbeat</groupId>
     <artifactId>HeartbeatDemo</artifactId>
 
-
+    <dependencies>
+    </dependencies>
 </project>
