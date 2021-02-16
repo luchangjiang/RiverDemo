@@ -1,5 +1,6 @@
 package com.river.bean.controller;
 
+import com.river.bean.util.SpringContextHolder;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -25,6 +26,13 @@ public class ShutdownController implements ApplicationContextAware {
         ConfigurableApplicationContext ctx = (ConfigurableApplicationContext) applicationContext;
         ctx.close();
         return "context is shut down";
+    }
+
+    @PostMapping("/removeBean")
+    public String removeBean(String beanId) {
+        System.out.println(beanId + " - " + (SpringContextHolder.containsBean(beanId)? "found" : "not found"));
+        SpringContextHolder.unregisterBean(beanId);
+        return beanId + " - " + (SpringContextHolder.containsBean(beanId)? "found" : "not found");
     }
 
     @Override

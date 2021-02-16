@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PreDestroy;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -31,4 +32,8 @@ public class OrderEntity implements Serializable {
 
     private BigDecimal cost;
 
+    @PreDestroy
+    public void preDestroy() {
+        System.out.println("OrderEntity is destroyed");
+    }
 }

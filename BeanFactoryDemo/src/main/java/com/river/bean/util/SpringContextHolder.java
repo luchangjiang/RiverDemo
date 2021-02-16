@@ -69,6 +69,10 @@ public class SpringContextHolder implements ApplicationContextAware, DisposableB
 		return (T) applicationContext.getBean(name);
 	}
 
+	public static boolean containsBean(String name) {
+		return applicationContext.containsBean(name);
+	}
+
 	/**
 	 * 从静态变量applicationContext中取得Bean, 自动转型为所赋值对象的类型.
 	 */
