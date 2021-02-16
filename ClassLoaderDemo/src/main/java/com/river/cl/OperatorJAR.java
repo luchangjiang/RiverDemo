@@ -86,7 +86,7 @@ public class OperatorJAR { // 操作JAR文件的类
         }
         reader.close();// 关闭缓冲读流
     }
-
+/*
     public static void main(String args[]) throws IOException {// java程序主入口处
 
         String fileName = "C:\\tmp\\pigx-auth.jar";
@@ -98,5 +98,6 @@ public class OperatorJAR { // 操作JAR文件的类
         Thread.currentThread().setContextClassLoader(classLoader);
         readJARFile(fileName, basePackage);// 获得键盘输入的值
     }
+*/
 
 }
